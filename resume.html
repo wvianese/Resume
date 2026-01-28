@@ -920,7 +920,7 @@
             observer.observe(section);
         });
 
-        // Scramble text animation for name
+        // Elegant theatrical text scrambling animation
         class TextScramble {
             constructor(el) {
                 this.el = el;
@@ -933,15 +933,25 @@
                 const length = Math.max(oldText.length, newText.length);
                 const promise = new Promise((resolve) => this.resolve = resolve);
                 this.queue = [];
-
+                
+                // Create progressive timing - slower as we move through the name
                 for (let i = 0; i < length; i++) {
                     const from = oldText[i] || '';
                     const to = newText[i] || '';
-                    const start = Math.floor(Math.random() * 40);
-                    const end = start + Math.floor(Math.random() * 40);
+                    
+                    // Progressive delay - starts immediately, then gets increasingly delayed
+                    // This creates the "quick at start, slow at end" effect
+                    const baseDelay = Math.floor(i * 8); // Much slower progression
+                    const start = baseDelay + Math.floor(Math.random() * 15);
+                    
+                    // Duration gets longer for later characters
+                    // First name resolves quickly, last name takes longer (more theatrical)
+                    const baseDuration = 25 + (i * 3); // Starts at 25 frames, increases by 3 per character
+                    const end = start + baseDuration + Math.floor(Math.random() * 15);
+                    
                     this.queue.push({ from, to, start, end });
                 }
-
+                
                 cancelAnimationFrame(this.frameRequest);
                 this.frame = 0;
                 this.update();
@@ -951,10 +961,10 @@
             update() {
                 let output = '';
                 let complete = 0;
-
+                
                 for (let i = 0, n = this.queue.length; i < n; i++) {
                     let { from, to, start, end, char } = this.queue[i];
-
+                    
                     if (this.frame >= end) {
                         complete++;
                         output += to;
@@ -963,14 +973,14 @@
                             char = this.randomChar();
                             this.queue[i].char = char;
                         }
-                        output += `<span class="dud">${char}</span>`;
+                        output += `<span style="opacity: 0.5">${char}</span>`;
                     } else {
                         output += from;
                     }
                 }
-
+                
                 this.el.innerHTML = output;
-
+                
                 if (complete === this.queue.length) {
                     this.resolve();
                 } else {
@@ -984,18 +994,18 @@
             }
         }
 
-        // Trigger scramble animation on page load
+        // Trigger the elegant animation on page load
         window.addEventListener('DOMContentLoaded', () => {
             const nameElement = document.querySelector('h1');
             const fx = new TextScramble(nameElement);
-
-            // Start with scrambled text
-            nameElement.innerText = 'XXXXXXXXXXXXXXXX';
-
-            // Animate to real name after a short delay
+            
+            // Start with blank placeholder
+            nameElement.innerText = '                 ';
+            
+            // Wait a moment for dramatic effect, then begin
             setTimeout(() => {
                 fx.setText('William J Vianese');
-            }, 500);
+            }, 800);
         });
     </script>
 </body>
