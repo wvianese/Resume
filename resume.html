@@ -6,16 +6,17 @@
     <title>William J Vianese - Math & CS Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a1a2e;
-            --secondary: #16213e;
-            --accent: #0f3460;
-            --highlight: #e94560;
-            --text: #eee;
-            --text-dim: #a8a8b3;
-            --bg-pattern: #0a0a14;
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #334155;
+            --highlight: #3b82f6;
+            --highlight-bright: #60a5fa;
+            --text: #f1f5f9;
+            --text-dim: #94a3b8;
+            --bg-pattern: #020617;
         }
 
         * {
@@ -25,7 +26,7 @@
         }
 
         body {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg-pattern);
             color: var(--text);
             line-height: 1.6;
@@ -46,7 +47,7 @@
 
         .geo-shape {
             position: absolute;
-            border: 2px solid var(--highlight);
+            border: 2px solid rgba(59, 130, 246, 0.2);
             animation: float 20s infinite ease-in-out;
         }
 
@@ -136,23 +137,23 @@
             object-fit: cover;
             object-position: center 20%;
             border: 4px solid var(--highlight);
-            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .profile-photo:hover {
             transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.5);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5);
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 900;
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            font-weight: 800;
             margin-bottom: 0.5rem;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-            background: linear-gradient(135deg, var(--text) 0%, var(--highlight) 100%);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--text) 0%, var(--highlight-bright) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -170,8 +171,9 @@
             max-width: 600px;
             margin-bottom: 3rem;
             color: var(--text-dim);
-            border-left: 3px solid var(--highlight);
+            border-left: 4px solid var(--highlight);
             padding-left: 1.5rem;
+            line-height: 1.7;
         }
 
         @keyframes fadeInUp {
@@ -238,12 +240,13 @@
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 3rem;
             font-weight: 700;
             position: relative;
             display: inline-block;
+            letter-spacing: -0.01em;
         }
 
         .section-title::before {
@@ -251,7 +254,7 @@
             position: absolute;
             left: -3rem;
             color: var(--highlight);
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'Fira Code', monospace;
         }
 
         /* Education */
@@ -271,7 +274,7 @@
 
         .education-item:hover {
             transform: translateX(10px);
-            box-shadow: -10px 10px 30px rgba(233, 69, 96, 0.2);
+            box-shadow: -10px 10px 30px rgba(59, 130, 246, 0.3);
         }
 
         @keyframes fadeInLeft {
@@ -310,9 +313,20 @@
         }
 
         .university-logo {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             object-fit: contain;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(96, 165, 250, 0.05) 100%);
+            padding: 0.75rem;
+            border-radius: 12px;
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .university-logo:hover {
+            border-color: var(--highlight);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
         }
 
         /* Projects */
@@ -360,7 +374,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--highlight) 0%, transparent 100%);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, transparent 100%);
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -398,11 +412,21 @@
         }
 
         .tech-tag {
-            background: var(--accent);
-            padding: 0.3rem 0.8rem;
-            font-size: 0.8rem;
-            border: 1px solid var(--highlight);
-            color: var(--text);
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.4rem 0.9rem;
+            font-size: 0.85rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--highlight-bright);
+            font-family: 'Fira Code', monospace;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: var(--highlight);
+            transform: translateY(-2px);
         }
 
         /* Skills */
@@ -430,7 +454,8 @@
             color: var(--highlight);
             margin-bottom: 1rem;
             font-size: 1.2rem;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
         }
 
         .skill-category ul {
