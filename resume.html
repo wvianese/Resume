@@ -121,6 +121,29 @@
             animation: fadeInUp 1s ease-out forwards;
         }
 
+        .hero-name-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--highlight);
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.5);
+        }
+
         h1 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(3rem, 8vw, 7rem);
@@ -517,7 +540,10 @@
         <!-- Hero Section -->
         <header>
             <div class="hero-content">
-                <h1>William J Vianese</h1>
+                <div class="hero-name-section">
+                    <img src="profile-photo.jpg" alt="William J Vianese" class="profile-photo">
+                    <h1>William J Vianese</h1>
+                </div>
                 <div class="subtitle">Mathematics & Computer Science • Environmental Analysis</div>
                 <p class="tagline">
                     Data science and software engineering student building solutions through
