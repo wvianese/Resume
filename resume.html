@@ -263,7 +263,7 @@
 
         .education-item h3 {
             font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0;
             color: var(--text);
         }
 
@@ -276,6 +276,20 @@
         .education-item .date {
             color: var(--text-dim);
             font-size: 0.9rem;
+        }
+
+        .university-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .university-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            filter: brightness(0.9);
         }
 
         /* Projects */
@@ -516,7 +530,10 @@
         <section id="education">
             <h2 class="section-title">Education</h2>
             <div class="education-item">
-                <h3>Washington University in St. Louis</h3>
+                <div class="university-header">
+                    <img src="washu-emblem.png" alt="Washington University Shield" class="university-logo">
+                    <h3>Washington University in St. Louis</h3>
+                </div>
                 <div class="degree">Bachelor of Arts - Double Major: Mathematics & Computer Science • Environmental Analysis</div>
                 <div class="date">Expected Graduation: May 2026 | St. Louis, MO</div>
                 <p style="margin-top: 1rem; color: var(--text-dim);">
