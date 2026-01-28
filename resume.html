@@ -329,6 +329,30 @@
             box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
         }
 
+        .company-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(96, 165, 250, 0.05) 100%);
+            padding: 0.5rem;
+            border-radius: 10px;
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .company-logo:hover {
+            border-color: var(--highlight);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+
         /* Projects */
         .projects-grid {
             display: grid;
@@ -658,7 +682,10 @@
             <h2 class="section-title">Experience</h2>
 
             <div class="education-item">
-                <h3>Camp Emerson | Hinsdale, MA</h3>
+                <div class="company-header">
+                    <img src="camp-emerson-logo.png" alt="Camp Emerson Logo" class="company-logo">
+                    <h3>Camp Emerson | Hinsdale, MA</h3>
+                </div>
                 <div class="degree">Data & Systems Manager</div>
                 <div class="date">May 2025 – August 2025</div>
                 <ul style="margin-top: 1rem; color: var(--text-dim); list-style: none; padding-left: 0;">
@@ -682,7 +709,10 @@
             </div>
 
             <div class="education-item">
-                <h3>Camp Emerson | Hinsdale, MA</h3>
+                <div class="company-header">
+                    <img src="camp-emerson-logo.png" alt="Camp Emerson Logo" class="company-logo">
+                    <h3>Camp Emerson | Hinsdale, MA</h3>
+                </div>
                 <div class="degree">Program Director</div>
                 <div class="date">May 2024 – August 2024</div>
                 <ul style="margin-top: 1rem; color: var(--text-dim); list-style: none; padding-left: 0;">
@@ -706,7 +736,10 @@
             </div>
 
             <div class="education-item">
-                <h3>Camp Emerson | Hinsdale, MA</h3>
+                <div class="company-header">
+                    <img src="camp-emerson-logo.png" alt="Camp Emerson Logo" class="company-logo">
+                    <h3>Camp Emerson | Hinsdale, MA</h3>
+                </div>
                 <div class="degree">Wilderness Director</div>
                 <div class="date">May 2023 – August 2023</div>
                 <ul style="margin-top: 1rem; color: var(--text-dim); list-style: none; padding-left: 0;">
@@ -726,7 +759,10 @@
             </div>
 
             <div class="education-item">
-                <h3>Camp Emerson | Hinsdale, MA</h3>
+                <div class="company-header">
+                    <img src="camp-emerson-logo.png" alt="Camp Emerson Logo" class="company-logo">
+                    <h3>Camp Emerson | Hinsdale, MA</h3>
+                </div>
                 <div class="degree">Youth Development Specialist & Wilderness Instructor</div>
                 <div class="date">May 2022 – August 2022</div>
                 <ul style="margin-top: 1rem; color: var(--text-dim); list-style: none; padding-left: 0;">
