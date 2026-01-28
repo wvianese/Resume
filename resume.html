@@ -920,11 +920,11 @@
             observer.observe(section);
         });
 
-        // Professional text scramble animation
+        // Scramble text animation for name
         class TextScramble {
             constructor(el) {
                 this.el = el;
-                this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
+                this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 this.update = this.update.bind(this);
             }
 
@@ -933,15 +933,15 @@
                 const length = Math.max(oldText.length, newText.length);
                 const promise = new Promise((resolve) => this.resolve = resolve);
                 this.queue = [];
-                
+
                 for (let i = 0; i < length; i++) {
                     const from = oldText[i] || '';
                     const to = newText[i] || '';
-                    const start = Math.floor(Math.random() * 20);
-                    const end = start + Math.floor(Math.random() * 20) + 20;
+                    const start = Math.floor(Math.random() * 40);
+                    const end = start + Math.floor(Math.random() * 40);
                     this.queue.push({ from, to, start, end });
                 }
-                
+
                 cancelAnimationFrame(this.frameRequest);
                 this.frame = 0;
                 this.update();
@@ -951,26 +951,26 @@
             update() {
                 let output = '';
                 let complete = 0;
-                
+
                 for (let i = 0, n = this.queue.length; i < n; i++) {
                     let { from, to, start, end, char } = this.queue[i];
-                    
+
                     if (this.frame >= end) {
                         complete++;
                         output += to;
                     } else if (this.frame >= start) {
-                        if (!char || Math.random() < 0.35) {
+                        if (!char || Math.random() < 0.28) {
                             char = this.randomChar();
                             this.queue[i].char = char;
                         }
-                        output += `<span style="color: rgba(59, 130, 246, 0.7)">${char}</span>`;
+                        output += `<span class="dud">${char}</span>`;
                     } else {
                         output += from;
                     }
                 }
-                
+
                 this.el.innerHTML = output;
-                
+
                 if (complete === this.queue.length) {
                     this.resolve();
                 } else {
@@ -984,16 +984,18 @@
             }
         }
 
-        // Trigger animation on page load
+        // Trigger scramble animation on page load
         window.addEventListener('DOMContentLoaded', () => {
             const nameElement = document.querySelector('h1');
             const fx = new TextScramble(nameElement);
-            
-            nameElement.innerText = 'XXXXXXXX X XXXXXXXX';
-            
+
+            // Start with scrambled text
+            nameElement.innerText = 'XXXXXXXXXXXXXXXX';
+
+            // Animate to real name after a short delay
             setTimeout(() => {
                 fx.setText('William J Vianese');
-            }, 400);
+            }, 500);
         });
     </script>
 </body>
