@@ -45,6 +45,16 @@
             pointer-events: none;
         }
 
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
         .geo-shape {
             position: absolute;
             border: 2px solid rgba(59, 130, 246, 0.2);
@@ -252,7 +262,7 @@
         .section-title::before {
             content: '//';
             position: absolute;
-            left: -3rem;
+            left: -4.5rem;
             color: var(--highlight);
             font-family: 'Fira Code', monospace;
         }
@@ -313,20 +323,21 @@
         }
 
         .university-logo {
-            width: 70px;
-            height: 70px;
+            width: 95px;
+            height: 95px;
             object-fit: contain;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(96, 165, 250, 0.05) 100%);
-            padding: 0.75rem;
-            border-radius: 12px;
-            border: 2px solid rgba(59, 130, 246, 0.2);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(96, 165, 250, 0.15) 100%);
+            padding: 1rem;
+            border-radius: 14px;
+            border: 3px solid rgba(59, 130, 246, 0.4);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
             transition: all 0.3s ease;
         }
 
         .university-logo:hover {
             border-color: var(--highlight);
             transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
         }
 
         .company-header {
@@ -337,20 +348,21 @@
         }
 
         .company-logo {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             object-fit: contain;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(96, 165, 250, 0.05) 100%);
-            padding: 0.5rem;
-            border-radius: 10px;
-            border: 2px solid rgba(59, 130, 246, 0.2);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(96, 165, 250, 0.15) 100%);
+            padding: 0.75rem;
+            border-radius: 12px;
+            border: 3px solid rgba(59, 130, 246, 0.4);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
             transition: all 0.3s ease;
         }
 
         .company-logo:hover {
             border-color: var(--highlight);
             transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
         }
 
         /* Projects */
@@ -567,6 +579,9 @@
     </style>
 </head>
 <body>
+    <!-- Particle background canvas -->
+    <canvas id="particle-canvas"></canvas>
+
     <!-- Geometric background -->
     <div class="background-pattern">
         <div class="geo-shape"></div>
@@ -920,11 +935,11 @@
             observer.observe(section);
         });
 
-        // Scramble text animation for name
+        // Scramble text animation for name - smoother and sequential
         class TextScramble {
             constructor(el) {
                 this.el = el;
-                this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
                 this.update = this.update.bind(this);
             }
 
@@ -934,11 +949,13 @@
                 const promise = new Promise((resolve) => this.resolve = resolve);
                 this.queue = [];
 
+                // Make animation sequential - each letter starts and ends based on position
                 for (let i = 0; i < length; i++) {
                     const from = oldText[i] || '';
                     const to = newText[i] || '';
-                    const start = Math.floor(Math.random() * 40);
-                    const end = start + Math.floor(Math.random() * 40);
+                    // Sequential start times with overlap
+                    const start = i * 8;  // Each letter starts 8 frames after previous
+                    const end = start + 60; // Each letter scrambles for 60 frames
                     this.queue.push({ from, to, start, end });
                 }
 
@@ -959,7 +976,8 @@
                         complete++;
                         output += to;
                     } else if (this.frame >= start) {
-                        if (!char || Math.random() < 0.28) {
+                        // Scramble with 20% chance to change each frame (smoother)
+                        if (!char || Math.random() < 0.2) {
                             char = this.randomChar();
                             this.queue[i].char = char;
                         }
@@ -990,13 +1008,94 @@
             const fx = new TextScramble(nameElement);
 
             // Start with scrambled text
-            nameElement.innerText = 'XXXXXXXXXXX';
+            nameElement.innerText = '############';
 
             // Animate to real name after a short delay
             setTimeout(() => {
                 fx.setText('Will Vianese');
-            }, 500);
+            }, 300);
         });
+
+        // Particle background animation - responsive to scroll
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let scrollY = 0;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        }
+
+        function initParticles() {
+            particles = [];
+            const spacing = 100;
+            const cols = Math.ceil(canvas.width / spacing) + 1;
+            const rows = Math.ceil(canvas.height / spacing) + 1;
+
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    particles.push({
+                        baseX: i * spacing,
+                        baseY: j * spacing,
+                        x: i * spacing,
+                        y: j * spacing,
+                        size: Math.random() * 2 + 1,
+                        speedX: (Math.random() - 0.5) * 0.5,
+                        speedY: (Math.random() - 0.5) * 0.5
+                    });
+                }
+            }
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                // Parallax effect based on scroll
+                const scrollOffset = scrollY * 0.3;
+                const offsetX = Math.sin(scrollOffset * 0.001 + particle.baseY * 0.01) * 10;
+                const offsetY = Math.cos(scrollOffset * 0.001 + particle.baseX * 0.01) * 10;
+
+                particle.x = particle.baseX + offsetX;
+                particle.y = particle.baseY + offsetY - (scrollY * 0.1);
+
+                // Draw particle
+                ctx.fillStyle = `rgba(59, 130, 246, ${0.15 + Math.sin(scrollOffset * 0.002) * 0.1})`;
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Draw connections to nearby particles
+                particles.forEach(other => {
+                    const dx = particle.x - other.x;
+                    const dy = particle.y - other.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150 && distance > 0) {
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.05 * (1 - distance / 150)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(other.x, other.y);
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            requestAnimationFrame(drawParticles);
+        }
+
+        // Update scroll position
+        window.addEventListener('scroll', () => {
+            scrollY = window.scrollY;
+        });
+
+        // Initialize
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        drawParticles();
     </script>
 </body>
 </html>
