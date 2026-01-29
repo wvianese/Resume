@@ -937,10 +937,9 @@
                 for (let i = 0; i < length; i++) {
                     const from = oldText[i] || '';
                     const to = newText[i] || '';
-                    const start = i * delayPerChar;          // strictly staggered
-                    const end = start + 25 + Math.random() * 10;
-
-                    this.queue.push({ from, to, start, end, char: null });
+                    const start = Math.floor(Math.random() * 40);
+                    const end = start + Math.floor(Math.random() * 40);
+                    this.queue.push({ from, to, start, end });
                 }
 
                 cancelAnimationFrame(this.frameRequest);
