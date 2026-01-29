@@ -323,21 +323,22 @@
         }
 
         .university-logo {
-            width: 95px;
-            height: 95px;
+            width: 110px;
+            height: 110px;
             object-fit: contain;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(96, 165, 250, 0.15) 100%);
-            padding: 1rem;
-            border-radius: 14px;
-            border: 3px solid rgba(59, 130, 246, 0.4);
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.35) 0%, rgba(96, 165, 250, 0.25) 100%);
+            padding: 1.2rem;
+            border-radius: 16px;
+            border: 3px solid rgba(59, 130, 246, 0.6);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.35), inset 0 0 20px rgba(59, 130, 246, 0.1);
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
         .university-logo:hover {
             border-color: var(--highlight);
             transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 10px 35px rgba(59, 130, 246, 0.6), inset 0 0 30px rgba(59, 130, 246, 0.2);
         }
 
         .company-header {
@@ -348,21 +349,22 @@
         }
 
         .company-logo {
-            width: 80px;
-            height: 80px;
+            width: 95px;
+            height: 95px;
             object-fit: contain;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(96, 165, 250, 0.15) 100%);
-            padding: 0.75rem;
-            border-radius: 12px;
-            border: 3px solid rgba(59, 130, 246, 0.4);
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.35) 0%, rgba(96, 165, 250, 0.25) 100%);
+            padding: 1rem;
+            border-radius: 14px;
+            border: 3px solid rgba(59, 130, 246, 0.6);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.35), inset 0 0 20px rgba(59, 130, 246, 0.1);
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
         .company-logo:hover {
             border-color: var(--highlight);
             transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 10px 35px rgba(59, 130, 246, 0.6), inset 0 0 30px rgba(59, 130, 246, 0.2);
         }
 
         /* Projects */
@@ -490,6 +492,26 @@
             background: rgba(59, 130, 246, 0.2);
             border-color: var(--highlight);
             transform: translateY(-2px);
+        }
+
+        /* Rowing Photo */
+        .section-hero-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            border: 3px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        .section-hero-image:hover {
+            transform: translateY(-5px);
+            border-color: var(--highlight);
+            box-shadow: 0 15px 50px rgba(59, 130, 246, 0.4);
         }
 
         /* Skills */
@@ -878,6 +900,7 @@
         <!-- Activities & Awards Section -->
         <section id="activities">
             <h2 class="section-title">Activities & Awards</h2>
+            <img src="rowing-action.jpg" alt="Washington University Rowing Team in Action" class="section-hero-image">
             <div class="education-item">
                 <h3>Washington University Rowing Team</h3>
                 <div class="degree">Coach and Coxswain</div>
@@ -998,9 +1021,9 @@
                 for (let i = 0; i < length; i++) {
                     const from = oldText[i] || '';
                     const to = newText[i] || '';
-                    // Sequential start times with overlap
-                    const start = i * 8;  // Each letter starts 8 frames after previous
-                    const end = start + 60; // Each letter scrambles for 60 frames
+                    // Sequential start times with overlap - faster animation
+                    const start = i * 4;  // Each letter starts 4 frames after previous (faster)
+                    const end = start + 35; // Each letter scrambles for 35 frames (faster)
                     this.queue.push({ from, to, start, end });
                 }
 
@@ -1061,75 +1084,55 @@
             }, 300);
         });
 
-        // Particle background animation - responsive to scroll
+        // Matrix-style flowing code background - responsive to scroll
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
+        let columns = [];
         let scrollY = 0;
+        const chars = '01ABCDEFαβγδΣΠλμ∫∂∇√∞';
+        const fontSize = 14;
+        let columnCount;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            initParticles();
+            columnCount = Math.floor(canvas.width / fontSize);
+            columns = Array(columnCount).fill(0).map(() => ({
+                y: Math.random() * canvas.height,
+                speed: 0.3 + Math.random() * 0.7,
+                opacity: 0.05 + Math.random() * 0.15
+            }));
         }
 
-        function initParticles() {
-            particles = [];
-            const spacing = 100;
-            const cols = Math.ceil(canvas.width / spacing) + 1;
-            const rows = Math.ceil(canvas.height / spacing) + 1;
+        function drawMatrix() {
+            // Fade effect
+            ctx.fillStyle = 'rgba(2, 6, 23, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            for (let i = 0; i < cols; i++) {
-                for (let j = 0; j < rows; j++) {
-                    particles.push({
-                        baseX: i * spacing,
-                        baseY: j * spacing,
-                        x: i * spacing,
-                        y: j * spacing,
-                        size: Math.random() * 2 + 1,
-                        speedX: (Math.random() - 0.5) * 0.5,
-                        speedY: (Math.random() - 0.5) * 0.5
-                    });
+            ctx.font = fontSize + 'px "Fira Code", monospace';
+
+            columns.forEach((col, i) => {
+                const char = chars[Math.floor(Math.random() * chars.length)];
+                const x = i * fontSize;
+
+                // Add scroll-based movement
+                const scrollInfluence = (scrollY * 0.02) % canvas.height;
+                let y = col.y + scrollInfluence;
+
+                // Gradient color effect
+                const colorIntensity = col.opacity + Math.sin(scrollY * 0.001 + i * 0.1) * 0.1;
+                ctx.fillStyle = `rgba(59, 130, 246, ${colorIntensity})`;
+                ctx.fillText(char, x, y);
+
+                // Reset column when it goes off screen
+                if (y > canvas.height + Math.random() * canvas.height) {
+                    col.y = -fontSize;
                 }
-            }
-        }
 
-        function drawParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(particle => {
-                // Parallax effect based on scroll
-                const scrollOffset = scrollY * 0.3;
-                const offsetX = Math.sin(scrollOffset * 0.001 + particle.baseY * 0.01) * 10;
-                const offsetY = Math.cos(scrollOffset * 0.001 + particle.baseX * 0.01) * 10;
-
-                particle.x = particle.baseX + offsetX;
-                particle.y = particle.baseY + offsetY - (scrollY * 0.1);
-
-                // Draw particle
-                ctx.fillStyle = `rgba(59, 130, 246, ${0.15 + Math.sin(scrollOffset * 0.002) * 0.1})`;
-                ctx.beginPath();
-                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                ctx.fill();
-
-                // Draw connections to nearby particles
-                particles.forEach(other => {
-                    const dx = particle.x - other.x;
-                    const dy = particle.y - other.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 150 && distance > 0) {
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.05 * (1 - distance / 150)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(particle.x, particle.y);
-                        ctx.lineTo(other.x, other.y);
-                        ctx.stroke();
-                    }
-                });
+                col.y += col.speed;
             });
 
-            requestAnimationFrame(drawParticles);
+            requestAnimationFrame(drawMatrix);
         }
 
         // Update scroll position
@@ -1140,7 +1143,7 @@
         // Initialize
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
-        drawParticles();
+        drawMatrix();
     </script>
 </body>
 </html>
