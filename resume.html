@@ -369,6 +369,56 @@
             margin-top: 2rem;
         }
 
+        .projects-sub-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin: 2.5rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .projects-sub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .project-card--sub {
+            background: var(--secondary);
+            padding: 1.4rem 1.6rem;
+            border: 1px solid var(--accent);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        .project-card--sub:nth-child(1) { animation-delay: 0.6s; }
+        .project-card--sub:nth-child(2) { animation-delay: 0.8s; }
+        .project-card--sub:nth-child(3) { animation-delay: 1.0s; }
+
+        .project-card--sub:hover {
+            transform: translateY(-4px);
+            border-color: var(--highlight);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card--sub h3 {
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
+            color: var(--text);
+        }
+
+        .project-card--sub p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 0.9rem;
+            line-height: 1.5;
+        }
+
         .project-card {
             background: var(--secondary);
             padding: 2rem;
@@ -768,10 +818,11 @@
                     <img src="map-cover.png" alt="Ferguson Vacant Housing Interactive Map" class="project-image">
                     <h3>Interactive Ferguson Vacant Housing Map</h3>
                     <p>
-                        Developed an interactive geospatial visualization tool to analyze vacant housing
-                        patterns in Ferguson, MO. Built with Leaflet.js and Folium to enable dynamic
-                        layer toggling, property data exploration, and spatial analysis. Supports urban
-                        planning and policy research through accessible data visualization.
+                        Scraped, cleaned, and mapped every vacant property in Ferguson, MO into a fully
+                        interactive geospatial tool — live on the web. Built custom data pipelines to
+                        normalize address records and plotted them with dynamic layer controls so users
+                        can explore vacancy patterns by neighborhood, street, and property type. A real
+                        tool built for real civic impact.
                     </p>
                     <div class="tech-tags">
                         <span class="tech-tag">Python</span>
@@ -779,6 +830,7 @@
                         <span class="tech-tag">Leaflet.js</span>
                         <span class="tech-tag">GIS</span>
                         <span class="tech-tag">Data Visualization</span>
+                        <span class="tech-tag">Web Scraping</span>
                     </div>
                 </a>
 
@@ -786,10 +838,11 @@
                     <img src="monopoly-screenshot.png" alt="Multiplayer Monopoly Game" class="project-image">
                     <h3>Multiplayer Monopoly</h3>
                     <p>
-                        Built a real-time multiplayer Monopoly game playable in the browser. Players create or join
-                        games via a 6-letter code and compete with full rule support — property buying, rent
-                        calculation, jail mechanics, railroads, utilities, and bankruptcy. Features animated dice
-                        rolls and in-game chat via WebSockets.
+                        Engineered a fully playable, real-time multiplayer Monopoly game from scratch —
+                        live on the web, no download needed. Built the entire game engine in Python with
+                        FastAPI and WebSockets handling live state sync across all players simultaneously.
+                        Complete rule implementation: rent, railroads, utilities, jail, bankruptcy, and
+                        animated dice. Just share a 6-letter code and play.
                     </p>
                     <div class="tech-tags">
                         <span class="tech-tag">Python</span>
@@ -798,17 +851,16 @@
                         <span class="tech-tag">React</span>
                         <span class="tech-tag">TypeScript</span>
                         <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Railway</span>
                     </div>
                 </a>
+            </div>
 
-                <div class="project-card">
-                    <h3>Dimensionality Reduction & Classification Analysis</h3>
-                    <p>
-                        Applied principal component analysis (PCA) to reduce feature dimensionality
-                        and analyze information retention. Implemented and compared multiple classification
-                        models including logistic regression, k-NN, and decision trees. Evaluated model
-                        performance using accuracy metrics and confusion matrices.
-                    </p>
+            <p class="projects-sub-label">Academic Projects</p>
+            <div class="projects-sub-grid">
+                <div class="project-card--sub">
+                    <h3>Dimensionality Reduction & Classification</h3>
+                    <p>Applied PCA to reduce feature dimensionality and compared logistic regression, k-NN, and decision tree classifiers using accuracy metrics and confusion matrices.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">Scikit-Learn</span>
@@ -817,14 +869,9 @@
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <h3>Predictive Modeling Workflow & Model Comparison</h3>
-                    <p>
-                        Built an end-to-end predictive modeling workflow including data preprocessing,
-                        feature selection, training, and evaluation. Compared multiple predictive models
-                        to assess generalization behavior and performance using quantitative metrics.
-                        Communicated findings through structured technical reports with visualizations.
-                    </p>
+                <div class="project-card--sub">
+                    <h3>Predictive Modeling & Model Comparison</h3>
+                    <p>Built an end-to-end ML pipeline covering preprocessing, feature selection, training, and evaluation across multiple models with structured reporting and visualizations.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">Pandas</span>
@@ -833,14 +880,9 @@
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <h3>Autonomous Agent Design Using Search & RL</h3>
-                    <p>
-                        Implemented classical search algorithms including DFS, BFS, Uniform Cost Search,
-                        and A*. Built adversarial agents using Minimax and Alpha-Beta pruning. Developed
-                        reinforcement learning agents via value iteration and Q-learning. Evaluated agent
-                        behavior across environments with varying constraints and reward structures.
-                    </p>
+                <div class="project-card--sub">
+                    <h3>Autonomous Agent Design</h3>
+                    <p>Implemented DFS, BFS, UCS, and A* search algorithms alongside Minimax, Alpha-Beta pruning, and Q-learning agents evaluated across constrained environments.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">AI</span>
