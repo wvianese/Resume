@@ -362,21 +362,47 @@
         }
 
         /* Projects */
+        .projects-section-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--highlight);
+            margin: 0 0 1.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .projects-section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--accent);
+        }
+
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 1.75rem;
+            margin-top: 0;
         }
 
         .projects-sub-label {
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
             color: var(--text-dim);
-            margin: 2.5rem 0 1rem 0;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--accent);
+            margin: 2.75rem 0 1.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .projects-sub-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--accent);
         }
 
         .projects-sub-grid {
@@ -416,14 +442,14 @@
             font-size: 0.85rem;
             color: var(--text-dim);
             margin-bottom: 0.9rem;
-            line-height: 1.5;
+            line-height: 1.55;
         }
 
         .project-card {
             background: var(--secondary);
-            padding: 2rem;
-            border: 2px solid var(--accent);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 1.5rem;
+            border: 1px solid var(--accent);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             opacity: 0;
@@ -487,19 +513,17 @@
         }
 
         .project-image {
-            width: 100%;
-            height: 220px;
+            width: calc(100% + 3rem);
+            margin: -1.5rem -1.5rem 1.25rem -1.5rem;
+            height: 200px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            border: 2px solid rgba(59, 130, 246, 0.3);
+            display: block;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
             transition: all 0.3s ease;
         }
 
         .project-card.interactive:hover .project-image {
-            transform: scale(1.02);
-            border-color: var(--highlight);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+            opacity: 0.9;
         }
 
         .project-image--contain {
@@ -508,14 +532,16 @@
         }
 
         .project-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
+            font-size: 1.15rem;
+            margin-bottom: 0.6rem;
             position: relative;
             z-index: 1;
         }
 
         .project-card p {
             color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
             margin-bottom: 1rem;
             position: relative;
             z-index: 1;
@@ -813,16 +839,17 @@
         <!-- Projects Section -->
         <section id="projects">
             <h2 class="section-title">Projects</h2>
+
+            <p class="projects-section-label">Personal Projects</p>
             <div class="projects-grid">
                 <a href="https://ferguson-map.netlify.app/" target="_blank" class="project-card interactive">
                     <img src="map-cover.png" alt="Ferguson Vacant Housing Interactive Map" class="project-image">
                     <h3>Interactive Ferguson Vacant Housing Map</h3>
                     <p>
-                        Scraped, cleaned, and mapped every vacant property in Ferguson, MO into a fully
-                        interactive geospatial tool — live on the web. Built custom data pipelines to
-                        normalize address records and plotted them with dynamic layer controls so users
-                        can explore vacancy patterns by neighborhood, street, and property type. A real
-                        tool built for real civic impact.
+                        Scraped, cleaned, and mapped every vacant property in Ferguson, MO into a live,
+                        interactive geospatial tool. Built custom data pipelines to normalize address records
+                        and visualize vacancy patterns with dynamic layer controls by neighborhood, street,
+                        and property type.
                     </p>
                     <div class="tech-tags">
                         <span class="tech-tag">Python</span>
@@ -838,11 +865,10 @@
                     <img src="monopoly-screenshot.png" alt="Multiplayer Monopoly Game" class="project-image">
                     <h3>Multiplayer Monopoly</h3>
                     <p>
-                        Engineered a fully playable, real-time multiplayer Monopoly game from scratch —
-                        live on the web, no download needed. Built the entire game engine in Python with
-                        FastAPI and WebSockets handling live state sync across all players simultaneously.
-                        Complete rule implementation: rent, railroads, utilities, jail, bankruptcy, and
-                        animated dice. Just share a 6-letter code and play.
+                        Built a fully playable, real-time multiplayer Monopoly game from scratch — live on
+                        the web, no download needed. Python game engine with FastAPI and WebSockets syncing
+                        live state across all players. Full rule support: rent, railroads, utilities, jail,
+                        bankruptcy, and animated dice. Share a 6-letter code and play instantly.
                     </p>
                     <div class="tech-tags">
                         <span class="tech-tag">Python</span>
