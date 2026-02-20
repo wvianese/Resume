@@ -317,8 +317,8 @@
         }
 
         .university-logo {
-            width: 110px;
-            height: 110px;
+            width: 60px;
+            height: 60px;
             object-fit: contain;
             transition: transform 0.3s ease;
         }
@@ -335,8 +335,8 @@
         }
 
         .company-logo {
-            width: 95px;
-            height: 95px;
+            width: 55px;
+            height: 55px;
             object-fit: contain;
             transition: transform 0.3s ease;
         }
@@ -499,8 +499,10 @@
         .project-image {
             width: calc(100% + 3rem);
             margin: -1.5rem -1.5rem 1.25rem -1.5rem;
-            height: 200px;
+            height: auto;
+            max-height: 260px;
             object-fit: cover;
+            object-position: center top;
             display: block;
             border-bottom: 1px solid rgba(59, 130, 246, 0.3);
             transition: all 0.3s ease;
@@ -508,11 +510,6 @@
 
         .project-card.interactive:hover .project-image {
             opacity: 0.9;
-        }
-
-        .project-image--contain {
-            object-fit: contain;
-            background: #6bb5c4;
         }
 
         .project-card h3 {
