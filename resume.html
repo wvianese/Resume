@@ -320,19 +320,11 @@
             width: 110px;
             height: 110px;
             object-fit: contain;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 255, 0.1) 100%);
-            padding: 1.2rem;
-            border-radius: 16px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.2), inset 0 0 30px rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
         }
 
         .university-logo:hover {
-            border-color: rgba(255, 255, 255, 0.6);
             transform: scale(1.05);
-            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.4), inset 0 0 40px rgba(255, 255, 255, 0.25);
         }
 
         .company-header {
@@ -346,19 +338,11 @@
             width: 95px;
             height: 95px;
             object-fit: contain;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 255, 0.1) 100%);
-            padding: 1rem;
-            border-radius: 14px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.2), inset 0 0 30px rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
         }
 
         .company-logo:hover {
-            border-color: rgba(255, 255, 255, 0.6);
             transform: scale(1.05);
-            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.4), inset 0 0 40px rgba(255, 255, 255, 0.25);
         }
 
         /* Projects */
@@ -862,7 +846,7 @@
                 </a>
 
                 <a href="https://monopoly.up.railway.app/" target="_blank" class="project-card interactive">
-                    <img src="monopoly-screenshot.png" alt="Multiplayer Monopoly Game" class="project-image project-image--contain">
+                    <img src="monopoly-screenshot.png" alt="Multiplayer Monopoly Game" class="project-image">
                     <h3>Multiplayer Monopoly</h3>
                     <p>
                         Built a fully playable, real-time multiplayer Monopoly game from scratch — live on
