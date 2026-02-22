@@ -179,11 +179,40 @@
         .tagline {
             font-size: 1.1rem;
             max-width: 600px;
-            margin-bottom: 3rem;
+            margin-bottom: 1.25rem;
             color: var(--text-dim);
             border-left: 4px solid var(--highlight);
             padding-left: 1.5rem;
             line-height: 1.7;
+        }
+
+        .availability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            color: var(--highlight-bright);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.4rem 1rem;
+            margin-bottom: 3rem;
+            letter-spacing: 0.02em;
+        }
+
+        .availability-badge::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #4ade80;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
 
         @keyframes fadeInUp {
@@ -787,6 +816,7 @@
                 <p class="tagline">
                     Using data to drive smarter business decisions.
                 </p>
+                <div class="availability-badge">Available for full-time roles · May 2026</div>
             </div>
             <a href="#education" class="scroll-down">
                 <span class="scroll-down-text">See My Work</span>
@@ -1005,33 +1035,45 @@
             <h2 class="section-title">Skills</h2>
             <div class="skills-container">
                 <div class="skill-category">
-                    <h3>Programming Languages</h3>
+                    <h3>Languages</h3>
                     <ul>
                         <li>Python</li>
+                        <li>SQL</li>
+                        <li>TypeScript</li>
                         <li>Java</li>
                         <li>R</li>
                     </ul>
                 </div>
 
                 <div class="skill-category">
-                    <h3>Libraries & Frameworks</h3>
+                    <h3>Data & ML</h3>
                     <ul>
                         <li>Pandas</li>
                         <li>NumPy</li>
+                        <li>Scikit-Learn</li>
                         <li>Matplotlib</li>
                         <li>Seaborn</li>
-                        <li>Scikit-Learn</li>
                     </ul>
                 </div>
 
                 <div class="skill-category">
-                    <h3>Tools & Technologies</h3>
+                    <h3>Engineering</h3>
                     <ul>
+                        <li>FastAPI</li>
+                        <li>React</li>
+                        <li>WebSockets</li>
+                        <li>Docker</li>
+                        <li>REST APIs</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools</h3>
+                    <ul>
+                        <li>Git & GitHub</li>
                         <li>Google Suite</li>
                         <li>Microsoft Suite</li>
-                        <li>GitHub</li>
-                        <li>Zoom</li>
-                        <li>Slack</li>
+                        <li>Campminder</li>
                     </ul>
                 </div>
             </div>
@@ -1100,6 +1142,14 @@
                     <div>
                         <div style="font-weight: 700;">LinkedIn</div>
                         <div style="font-size: 0.9rem; color: var(--text-dim);">linkedin.com/in/will-vianese</div>
+                    </div>
+                </a>
+
+                <a href="https://github.com/wvianese" target="_blank" class="contact-link">
+                    <span class="contact-icon">⌨️</span>
+                    <div>
+                        <div style="font-weight: 700;">GitHub</div>
+                        <div style="font-size: 0.9rem; color: var(--text-dim);">github.com/wvianese</div>
                     </div>
                 </a>
             </div>
