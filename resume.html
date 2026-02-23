@@ -728,9 +728,10 @@
         /* Skills */
         .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(5, 1fr);
             gap: 2rem;
             margin-top: 2rem;
+            align-items: start;
         }
 
         .skill-category {
@@ -740,6 +741,8 @@
 
         .skill-category:nth-child(2) { animation-delay: 0.2s; }
         .skill-category:nth-child(3) { animation-delay: 0.4s; }
+        .skill-category:nth-child(4) { animation-delay: 0.6s; }
+        .skill-category:nth-child(5) { animation-delay: 0.8s; }
 
         .skill-category h3 {
             color: var(--highlight);
