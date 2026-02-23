@@ -525,6 +525,62 @@
             display: block;
         }
 
+        .project-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .project-card-overlay span {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border: 1.5px solid rgba(255,255,255,0.6);
+            padding: 0.5rem 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-card.interactive:hover .project-card-overlay {
+            opacity: 1;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            border: 1.5px solid var(--highlight);
+            color: var(--highlight-bright);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 0.5rem 1.25rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            margin-top: 1.5rem;
+        }
+
+        .download-btn:hover {
+            background: var(--highlight);
+            color: #fff;
+        }
+
+        .download-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
         .project-image {
             width: calc(100% + 3rem);
             margin: -1.5rem -1.5rem 1.25rem -1.5rem;
@@ -819,6 +875,10 @@
                 <p class="tagline">
                     Using data to drive smarter business decisions.
                 </p>
+                <a href="resume.pdf" download="William_Vianese_Resume.pdf" class="download-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download Resume
+                </a>
 
             </div>
             <a href="#education" class="scroll-down">
@@ -865,6 +925,7 @@
             <p class="projects-section-label">Personal Projects</p>
             <div class="projects-grid">
                 <a href="https://ferguson-map.netlify.app/" target="_blank" class="project-card interactive">
+                    <div class="project-card-overlay"><span>Visit Site ↗</span></div>
                     <img src="map-cover.png" alt="Ferguson Vacant Housing Interactive Map" class="project-image">
                     <h3>Interactive Ferguson Vacant Housing Map</h3>
                     <p>
@@ -884,6 +945,7 @@
                 </a>
 
                 <a href="https://monopoly.up.railway.app/" target="_blank" class="project-card interactive">
+                    <div class="project-card-overlay"><span>Visit Site ↗</span></div>
                     <img src="monopoly-screenshot.png" alt="Multiplayer Monopoly Game" class="project-image">
                     <h3>Multiplayer Monopoly</h3>
                     <p>
