@@ -728,45 +728,45 @@
         /* Skills */
         .skills-container {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.25rem;
             margin-top: 2rem;
             align-items: start;
         }
 
         .skill-category {
+            background: var(--secondary);
+            border: 1px solid var(--accent);
+            padding: 1.4rem 1.5rem;
             opacity: 0;
             animation: fadeIn 0.8s ease-out forwards;
+            transition: border-color 0.2s ease;
         }
 
-        .skill-category:nth-child(2) { animation-delay: 0.2s; }
-        .skill-category:nth-child(3) { animation-delay: 0.4s; }
-        .skill-category:nth-child(4) { animation-delay: 0.6s; }
-        .skill-category:nth-child(5) { animation-delay: 0.8s; }
+        .skill-category:hover {
+            border-color: var(--highlight);
+        }
+
+        .skill-category:nth-child(2) { animation-delay: 0.1s; }
+        .skill-category:nth-child(3) { animation-delay: 0.2s; }
+        .skill-category:nth-child(4) { animation-delay: 0.3s; }
+        .skill-category:nth-child(5) { animation-delay: 0.4s; }
 
         .skill-category h3 {
             color: var(--highlight);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            font-family: 'Inter', sans-serif;
+            margin-bottom: 0.9rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
             font-weight: 600;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid var(--accent);
         }
 
-        .skill-category ul {
-            list-style: none;
-        }
-
-        .skill-category li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .skill-category li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--highlight);
+        .skill-category p {
+            color: var(--text-dim);
+            font-size: 0.88rem;
+            line-height: 1.75;
         }
 
         /* Contact */
@@ -1108,58 +1108,23 @@
             <div class="skills-container">
                 <div class="skill-category">
                     <h3>Languages</h3>
-                    <ul>
-                        <li>Python</li>
-                        <li>SQL</li>
-                        <li>TypeScript</li>
-                        <li>Java</li>
-                        <li>R</li>
-                    </ul>
+                    <p>Python, SQL, TypeScript, Java, R</p>
                 </div>
                 <div class="skill-category">
                     <h3>Libraries</h3>
-                    <ul>
-                        <li>Pandas</li>
-                        <li>NumPy</li>
-                        <li>Scikit-Learn</li>
-                        <li>Matplotlib</li>
-                        <li>Seaborn</li>
-                    </ul>
+                    <p>Pandas, NumPy, Scikit-Learn, Matplotlib, Seaborn</p>
                 </div>
                 <div class="skill-category">
                     <h3>Methods</h3>
-                    <ul>
-                        <li>Regression & Classification</li>
-                        <li>Clustering</li>
-                        <li>Neural Networks</li>
-                        <li>Random Forest & SVM</li>
-                        <li>EDA</li>
-                        <li>Feature Selection</li>
-                        <li>Cross-Validation</li>
-                        <li>Bayesian Inference</li>
-                        <li>Hypothesis Testing</li>
-                        <li>Gradient Descent</li>
-                        <li>Convex Optimization</li>
-                    </ul>
+                    <p>Regression &amp; Classification, Clustering, Neural Networks, Random Forest &amp; SVM, EDA, Feature Selection, Cross-Validation, Bayesian Inference, Hypothesis Testing, Gradient Descent</p>
                 </div>
                 <div class="skill-category">
                     <h3>Engineering</h3>
-                    <ul>
-                        <li>FastAPI</li>
-                        <li>React</li>
-                        <li>WebSockets</li>
-                        <li>Docker</li>
-                        <li>REST APIs</li>
-                    </ul>
+                    <p>FastAPI, React, WebSockets, Docker, REST APIs</p>
                 </div>
                 <div class="skill-category">
                     <h3>Tools</h3>
-                    <ul>
-                        <li>Git & GitHub</li>
-                        <li>Google Suite</li>
-                        <li>Microsoft Suite</li>
-                        <li>Campminder</li>
-                    </ul>
+                    <p>Git &amp; GitHub, Google Suite, Microsoft Suite, Campminder</p>
                 </div>
             </div>
         </section>
