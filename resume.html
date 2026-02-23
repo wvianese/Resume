@@ -727,46 +727,63 @@
 
         /* Skills */
         .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
             margin-top: 2rem;
-            align-items: start;
-        }
-
-        .skill-category {
-            background: var(--secondary);
             border: 1px solid var(--accent);
-            padding: 1.4rem 1.5rem;
+        }
+
+        .skill-row {
+            display: grid;
+            grid-template-columns: 170px 1fr;
+            border-bottom: 1px solid var(--accent);
             opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards;
-            transition: border-color 0.2s ease;
+            animation: fadeIn 0.6s ease-out forwards;
         }
 
-        .skill-category:hover {
-            border-color: var(--highlight);
-        }
+        .skill-row:last-child { border-bottom: none; }
+        .skill-row:nth-child(2) { animation-delay: 0.08s; }
+        .skill-row:nth-child(3) { animation-delay: 0.16s; }
+        .skill-row:nth-child(4) { animation-delay: 0.24s; }
+        .skill-row:nth-child(5) { animation-delay: 0.32s; }
 
-        .skill-category:nth-child(2) { animation-delay: 0.1s; }
-        .skill-category:nth-child(3) { animation-delay: 0.2s; }
-        .skill-category:nth-child(4) { animation-delay: 0.3s; }
-        .skill-category:nth-child(5) { animation-delay: 0.4s; }
-
-        .skill-category h3 {
-            color: var(--highlight);
-            margin-bottom: 0.9rem;
-            font-size: 0.7rem;
+        .skill-row-label {
+            padding: 1rem 1.25rem;
+            font-size: 0.65rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
+            color: var(--highlight);
             font-weight: 600;
-            padding-bottom: 0.6rem;
-            border-bottom: 1px solid var(--accent);
+            border-right: 1px solid var(--accent);
+            display: flex;
+            align-items: center;
+            background: rgba(59, 130, 246, 0.04);
         }
 
-        .skill-category p {
+        .skill-row-tags {
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            align-items: center;
+        }
+
+        .skill-pill {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--accent);
             color: var(--text-dim);
-            font-size: 0.88rem;
-            line-height: 1.75;
+            font-size: 0.82rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .skill-pill:hover {
+            background: rgba(59, 130, 246, 0.12);
+            border-color: var(--highlight);
+            color: var(--text);
         }
 
         /* Contact */
@@ -1106,25 +1123,59 @@
         <section id="skills">
             <h2 class="section-title">Skills</h2>
             <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Languages</h3>
-                    <p>Python, SQL, TypeScript, Java, R</p>
+                <div class="skill-row">
+                    <span class="skill-row-label">Languages</span>
+                    <div class="skill-row-tags">
+                        <span class="skill-pill">Python</span>
+                        <span class="skill-pill">SQL</span>
+                        <span class="skill-pill">TypeScript</span>
+                        <span class="skill-pill">Java</span>
+                        <span class="skill-pill">R</span>
+                    </div>
                 </div>
-                <div class="skill-category">
-                    <h3>Libraries</h3>
-                    <p>Pandas, NumPy, Scikit-Learn, Matplotlib, Seaborn</p>
+                <div class="skill-row">
+                    <span class="skill-row-label">Libraries</span>
+                    <div class="skill-row-tags">
+                        <span class="skill-pill">Pandas</span>
+                        <span class="skill-pill">NumPy</span>
+                        <span class="skill-pill">Scikit-Learn</span>
+                        <span class="skill-pill">Matplotlib</span>
+                        <span class="skill-pill">Seaborn</span>
+                    </div>
                 </div>
-                <div class="skill-category">
-                    <h3>Methods</h3>
-                    <p>Regression &amp; Classification, Clustering, Neural Networks, Random Forest &amp; SVM, EDA, Feature Selection, Cross-Validation, Bayesian Inference, Hypothesis Testing, Gradient Descent</p>
+                <div class="skill-row">
+                    <span class="skill-row-label">Methods</span>
+                    <div class="skill-row-tags">
+                        <span class="skill-pill">Regression &amp; Classification</span>
+                        <span class="skill-pill">Clustering</span>
+                        <span class="skill-pill">Neural Networks</span>
+                        <span class="skill-pill">Random Forest &amp; SVM</span>
+                        <span class="skill-pill">EDA</span>
+                        <span class="skill-pill">Feature Selection</span>
+                        <span class="skill-pill">Cross-Validation</span>
+                        <span class="skill-pill">Bayesian Inference</span>
+                        <span class="skill-pill">Hypothesis Testing</span>
+                        <span class="skill-pill">Gradient Descent</span>
+                    </div>
                 </div>
-                <div class="skill-category">
-                    <h3>Engineering</h3>
-                    <p>FastAPI, React, WebSockets, Docker, REST APIs</p>
+                <div class="skill-row">
+                    <span class="skill-row-label">Engineering</span>
+                    <div class="skill-row-tags">
+                        <span class="skill-pill">FastAPI</span>
+                        <span class="skill-pill">React</span>
+                        <span class="skill-pill">WebSockets</span>
+                        <span class="skill-pill">Docker</span>
+                        <span class="skill-pill">REST APIs</span>
+                    </div>
                 </div>
-                <div class="skill-category">
-                    <h3>Tools</h3>
-                    <p>Git &amp; GitHub, Google Suite, Microsoft Suite, Campminder</p>
+                <div class="skill-row">
+                    <span class="skill-row-label">Tools</span>
+                    <div class="skill-row-tags">
+                        <span class="skill-pill">Git &amp; GitHub</span>
+                        <span class="skill-pill">Google Suite</span>
+                        <span class="skill-pill">Microsoft Suite</span>
+                        <span class="skill-pill">Campminder</span>
+                    </div>
                 </div>
             </div>
         </section>
