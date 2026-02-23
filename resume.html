@@ -229,11 +229,17 @@
         /* Navigation */
         nav {
             position: fixed;
-            top: 2rem;
-            right: 2rem;
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
             display: flex;
-            gap: 1.5rem;
+            justify-content: center;
+            gap: 0.25rem;
+            padding: 0.6rem 1.5rem;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
             opacity: 0;
             animation: fadeIn 1s ease-out 0.5s forwards;
         }
@@ -245,22 +251,16 @@
         nav a {
             color: var(--text-dim);
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 0.8rem;
             font-weight: 500;
-            padding: 0.75rem 1.25rem;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.85rem;
+            transition: color 0.2s ease;
         }
 
         nav a:hover {
-            color: var(--text);
-            background: rgba(59, 130, 246, 0.2);
-            border-color: var(--highlight);
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), inset 0 0 15px rgba(59, 130, 246, 0.2);
-            transform: translateY(-2px);
+            color: var(--highlight-bright);
         }
 
         /* Sections */
@@ -726,49 +726,49 @@
         }
 
         /* Skills */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+        .skills-chips-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
             margin-top: 2rem;
         }
 
-        .skill-category {
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards;
+        .skills-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
         }
 
-        .skill-category:nth-child(2) {
-            animation-delay: 0.2s;
+        .skills-row-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-dim);
+            min-width: 90px;
+            padding-top: 0.35rem;
+            flex-shrink: 0;
         }
 
-        .skill-category:nth-child(3) {
-            animation-delay: 0.4s;
+        .skills-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
-        .skill-category h3 {
-            color: var(--highlight);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
+        .skill-chip {
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            color: var(--text);
+            font-size: 0.82rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
         }
 
-        .skill-category ul {
-            list-style: none;
-        }
-
-        .skill-category li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .skill-category li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--highlight);
+        .skill-chip:hover {
+            background: rgba(59, 130, 246, 0.18);
+            border-color: var(--highlight);
+            color: var(--highlight-bright);
         }
 
         /* Contact */
@@ -1107,65 +1107,61 @@
         <!-- Skills Section -->
         <section id="skills">
             <h2 class="section-title">Skills</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Languages</h3>
-                    <ul>
-                        <li>Python</li>
-                        <li>SQL</li>
-                        <li>TypeScript</li>
-                        <li>Java</li>
-                        <li>R</li>
-                    </ul>
+            <div class="skills-chips-container">
+                <div class="skills-row">
+                    <span class="skills-row-label">Languages</span>
+                    <div class="skills-chips">
+                        <span class="skill-chip">Python</span>
+                        <span class="skill-chip">SQL</span>
+                        <span class="skill-chip">TypeScript</span>
+                        <span class="skill-chip">Java</span>
+                        <span class="skill-chip">R</span>
+                    </div>
                 </div>
-
-                <div class="skill-category">
-                    <h3>Libraries</h3>
-                    <ul>
-                        <li>Pandas</li>
-                        <li>NumPy</li>
-                        <li>Scikit-Learn</li>
-                        <li>Matplotlib</li>
-                        <li>Seaborn</li>
-                    </ul>
+                <div class="skills-row">
+                    <span class="skills-row-label">Libraries</span>
+                    <div class="skills-chips">
+                        <span class="skill-chip">Pandas</span>
+                        <span class="skill-chip">NumPy</span>
+                        <span class="skill-chip">Scikit-Learn</span>
+                        <span class="skill-chip">Matplotlib</span>
+                        <span class="skill-chip">Seaborn</span>
+                    </div>
                 </div>
-
-                <div class="skill-category">
-                    <h3>Methods</h3>
-                    <ul>
-                        <li>Regression & Classification</li>
-                        <li>Clustering</li>
-                        <li>Neural Networks</li>
-                        <li>Random Forest & SVM</li>
-                        <li>EDA</li>
-                        <li>Feature Selection</li>
-                        <li>Cross-Validation</li>
-                        <li>Bayesian Inference</li>
-                        <li>Hypothesis Testing</li>
-                        <li>Gradient Descent</li>
-                        <li>Convex Optimization</li>
-                    </ul>
+                <div class="skills-row">
+                    <span class="skills-row-label">Methods</span>
+                    <div class="skills-chips">
+                        <span class="skill-chip">Regression & Classification</span>
+                        <span class="skill-chip">Clustering</span>
+                        <span class="skill-chip">Neural Networks</span>
+                        <span class="skill-chip">Random Forest & SVM</span>
+                        <span class="skill-chip">EDA</span>
+                        <span class="skill-chip">Feature Selection</span>
+                        <span class="skill-chip">Cross-Validation</span>
+                        <span class="skill-chip">Bayesian Inference</span>
+                        <span class="skill-chip">Hypothesis Testing</span>
+                        <span class="skill-chip">Gradient Descent</span>
+                        <span class="skill-chip">Convex Optimization</span>
+                    </div>
                 </div>
-
-                <div class="skill-category">
-                    <h3>Engineering</h3>
-                    <ul>
-                        <li>FastAPI</li>
-                        <li>React</li>
-                        <li>WebSockets</li>
-                        <li>Docker</li>
-                        <li>REST APIs</li>
-                    </ul>
+                <div class="skills-row">
+                    <span class="skills-row-label">Engineering</span>
+                    <div class="skills-chips">
+                        <span class="skill-chip">FastAPI</span>
+                        <span class="skill-chip">React</span>
+                        <span class="skill-chip">WebSockets</span>
+                        <span class="skill-chip">Docker</span>
+                        <span class="skill-chip">REST APIs</span>
+                    </div>
                 </div>
-
-                <div class="skill-category">
-                    <h3>Tools</h3>
-                    <ul>
-                        <li>Git & GitHub</li>
-                        <li>Google Suite</li>
-                        <li>Microsoft Suite</li>
-                        <li>Campminder</li>
-                    </ul>
+                <div class="skills-row">
+                    <span class="skills-row-label">Tools</span>
+                    <div class="skills-chips">
+                        <span class="skill-chip">Git & GitHub</span>
+                        <span class="skill-chip">Google Suite</span>
+                        <span class="skill-chip">Microsoft Suite</span>
+                        <span class="skill-chip">Campminder</span>
+                    </div>
                 </div>
             </div>
         </section>
