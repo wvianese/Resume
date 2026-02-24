@@ -250,17 +250,36 @@
         }
 
         .nav-brand {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
             color: var(--highlight-bright);
-            letter-spacing: 0.08em;
+            letter-spacing: 0.12em;
             text-decoration: none;
             font-family: 'Fira Code', monospace;
-            transition: opacity 0.2s ease;
+            transition: all 0.2s ease;
+            border: 1.5px solid var(--highlight);
+            padding: 0.3rem 0.7rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-brand::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--highlight);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.2s ease;
+            z-index: -1;
         }
 
         .nav-brand:hover {
-            opacity: 0.75;
+            color: #fff;
+        }
+
+        .nav-brand:hover::before {
+            transform: scaleX(1);
         }
 
         .nav-links {
@@ -1362,11 +1381,22 @@
         }, { threshold: 0.3 });
         sections.forEach(s => sectionObserver.observe(s));
 
+        // WV brand scrolls to top
+        document.querySelector('.nav-brand').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const href = this.getAttribute('href');
+                if (href === '#') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
