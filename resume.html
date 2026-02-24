@@ -664,7 +664,7 @@
             gap: 0.5rem;
         }
 
-        .project-card.interactive:hover .project-card-overlay {
+        .project-image-wrapper.interactive:hover .project-card-overlay {
             opacity: 1;
         }
 
@@ -705,7 +705,7 @@
             transition: all 0.3s ease;
         }
 
-        .project-card.interactive:hover .project-image-wrapper .project-image {
+        .project-image-wrapper.interactive:hover .project-image {
             opacity: 0.9;
         }
 
@@ -1061,11 +1061,11 @@
 
             <p class="projects-section-label">Personal Projects</p>
             <div class="projects-grid">
-                <a href="https://ferguson-map.netlify.app/" target="_blank" class="project-card interactive">
-                    <div class="project-image-wrapper">
+                <div class="project-card">
+                    <a href="https://ferguson-map.netlify.app/" target="_blank" class="project-image-wrapper interactive">
                         <div class="project-card-overlay"><span>Visit Site ↗</span></div>
                         <img src="map-cover.png" alt="Ferguson Vacant Housing Interactive Map" class="project-image">
-                    </div>
+                    </a>
                     <h3>Interactive Ferguson Vacant Housing Map</h3>
                     <p>
                         Scraped, cleaned, and mapped every vacant property in Ferguson, MO into a live,
@@ -1081,13 +1081,13 @@
                         <span class="tech-tag">Data Visualization</span>
                         <span class="tech-tag">Web Scraping</span>
                     </div>
-                </a>
+                </div>
 
-                <a href="https://monopoly.up.railway.app/" target="_blank" class="project-card interactive">
-                    <div class="project-image-wrapper">
+                <div class="project-card">
+                    <a href="https://monopoly.up.railway.app/" target="_blank" class="project-image-wrapper interactive">
                         <div class="project-card-overlay"><span>Visit Site ↗</span></div>
                         <img src="monopoly-screenshot.png" alt="Multiplayer Monopoly Game" class="project-image">
-                    </div>
+                    </a>
                     <h3>Multiplayer Monopoly</h3>
                     <p>
                         Built a fully playable, real-time multiplayer Monopoly game from scratch — live on
@@ -1104,7 +1104,7 @@
                         <span class="tech-tag">Docker</span>
                         <span class="tech-tag">Railway</span>
                     </div>
-                </a>
+                </div>
             </div>
 
             <p class="projects-sub-label">Academic Projects</p>
