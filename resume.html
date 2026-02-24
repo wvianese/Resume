@@ -631,6 +631,13 @@
             display: block;
         }
 
+        .project-image-wrapper {
+            position: relative;
+            width: calc(100% + 3rem);
+            margin: -1.5rem -1.5rem 1.25rem -1.5rem;
+            overflow: hidden;
+        }
+
         .project-card-overlay {
             position: absolute;
             inset: 0;
@@ -688,8 +695,7 @@
         }
 
         .project-image {
-            width: calc(100% + 3rem);
-            margin: -1.5rem -1.5rem 1.25rem -1.5rem;
+            width: 100%;
             height: auto;
             max-height: 260px;
             object-fit: cover;
@@ -699,7 +705,7 @@
             transition: all 0.3s ease;
         }
 
-        .project-card.interactive:hover .project-image {
+        .project-card.interactive:hover .project-image-wrapper .project-image {
             opacity: 0.9;
         }
 
@@ -1056,8 +1062,10 @@
             <p class="projects-section-label">Personal Projects</p>
             <div class="projects-grid">
                 <a href="https://ferguson-map.netlify.app/" target="_blank" class="project-card interactive">
-                    <div class="project-card-overlay"><span>Visit Site ↗</span></div>
-                    <img src="map-cover.png" alt="Ferguson Vacant Housing Interactive Map" class="project-image">
+                    <div class="project-image-wrapper">
+                        <div class="project-card-overlay"><span>Visit Site ↗</span></div>
+                        <img src="map-cover.png" alt="Ferguson Vacant Housing Interactive Map" class="project-image">
+                    </div>
                     <h3>Interactive Ferguson Vacant Housing Map</h3>
                     <p>
                         Scraped, cleaned, and mapped every vacant property in Ferguson, MO into a live,
@@ -1076,8 +1084,10 @@
                 </a>
 
                 <a href="https://monopoly.up.railway.app/" target="_blank" class="project-card interactive">
-                    <div class="project-card-overlay"><span>Visit Site ↗</span></div>
-                    <img src="monopoly-screenshot.png" alt="Multiplayer Monopoly Game" class="project-image">
+                    <div class="project-image-wrapper">
+                        <div class="project-card-overlay"><span>Visit Site ↗</span></div>
+                        <img src="monopoly-screenshot.png" alt="Multiplayer Monopoly Game" class="project-image">
+                    </div>
                     <h3>Multiplayer Monopoly</h3>
                     <p>
                         Built a fully playable, real-time multiplayer Monopoly game from scratch — live on
