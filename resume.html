@@ -254,54 +254,50 @@
             display: flex;
             align-items: center;
             position: relative;
+            transition: opacity 0.2s ease;
         }
 
         .nav-brand svg {
-            width: 48px;
-            height: 32px;
+            width: 54px;
+            height: 36px;
             overflow: visible;
         }
 
-        /* Animated corner brackets */
-        .nav-brand .bracket {
+        .nav-brand .bg-diamond {
             fill: none;
             stroke: var(--highlight);
-            stroke-width: 1.5;
-            stroke-linecap: square;
-            transition: stroke 0.3s ease;
+            stroke-width: 1px;
+            transition: all 0.2s ease;
         }
 
-        .nav-brand .tl { stroke-dasharray: 14; stroke-dashoffset: 14; animation: draw-bracket 0.6s ease forwards 0.8s; }
-        .nav-brand .tr { stroke-dasharray: 14; stroke-dashoffset: 14; animation: draw-bracket 0.6s ease forwards 1.0s; }
-        .nav-brand .bl { stroke-dasharray: 14; stroke-dashoffset: 14; animation: draw-bracket 0.6s ease forwards 1.2s; }
-        .nav-brand .br { stroke-dasharray: 14; stroke-dashoffset: 14; animation: draw-bracket 0.6s ease forwards 1.4s; }
-
-        @keyframes draw-bracket {
-            to { stroke-dashoffset: 0; }
+        .nav-brand .fill-diamond {
+            fill: rgba(59, 130, 246, 0.12);
+            transition: fill 0.2s ease;
         }
 
         .nav-brand .letters {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            fill: var(--highlight-bright);
+            letter-spacing: 1.5px;
+            transition: fill 0.2s ease;
+        }
+
+        .nav-brand .slash {
             font-family: 'Fira Code', monospace;
-            font-size: 13px;
-            font-weight: 700;
-            fill: var(--highlight-bright);
-            letter-spacing: 2px;
+            font-size: 9px;
+            font-weight: 400;
+            fill: var(--highlight);
+            opacity: 0.7;
         }
 
-        .nav-brand .dot {
-            fill: var(--highlight-bright);
-            animation: pulse-brand 2.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse-brand {
-            0%, 100% { opacity: 1; r: 1.5px; }
-            50%       { opacity: 0.3; r: 1px; }
-        }
-
-        /* Hover: brackets glow and converge slightly */
-        .nav-brand:hover .bracket {
+        .nav-brand:hover .bg-diamond {
             stroke: var(--highlight-bright);
-            filter: drop-shadow(0 0 4px rgba(96,165,250,0.8));
+        }
+
+        .nav-brand:hover .fill-diamond {
+            fill: rgba(59, 130, 246, 0.25);
         }
 
         .nav-brand:hover .letters {
@@ -966,16 +962,16 @@
     <!-- Navigation -->
     <nav>
         <a href="#" class="nav-brand">
-            <svg viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
-                <!-- Corner brackets -->
-                <polyline class="bracket tl" points="14,4 4,4 4,14"/>
-                <polyline class="bracket tr" points="34,4 44,4 44,14"/>
-                <polyline class="bracket bl" points="14,28 4,28 4,18"/>
-                <polyline class="bracket br" points="34,28 44,28 44,18"/>
+            <svg viewBox="0 0 54 36" xmlns="http://www.w3.org/2000/svg">
+                <!-- Diamond background fill -->
+                <polygon class="fill-diamond" points="27,2 52,18 27,34 2,18"/>
+                <!-- Diamond outline -->
+                <polygon class="bg-diamond" points="27,2 52,18 27,34 2,18"/>
+                <!-- Small corner slash accents -->
+                <text class="slash" x="6" y="12">/</text>
+                <text class="slash" x="44" y="27">/</text>
                 <!-- WV letters -->
-                <text class="letters" x="50%" y="50%" dominant-baseline="central" text-anchor="middle">WV</text>
-                <!-- Pulsing dot accent -->
-                <circle class="dot" cx="44" cy="4" r="1.5"/>
+                <text class="letters" x="27" y="18" dominant-baseline="central" text-anchor="middle">WV</text>
             </svg>
         </a>
         <div class="nav-links">
