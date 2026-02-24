@@ -259,7 +259,7 @@
 
         .nav-brand svg {
             width: 52px;
-            height: 52px;
+            height: 36px;
             overflow: visible;
         }
 
@@ -283,13 +283,35 @@
             stroke-width: 0.8;
         }
 
+        .nav-brand .chip-trace {
+            fill: none;
+            stroke: rgba(59, 130, 246, 0.3);
+            stroke-width: 1;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.2s ease;
+        }
+
+        .nav-brand .chip-dot {
+            fill: rgba(59, 130, 246, 0.5);
+            transition: fill 0.2s ease;
+        }
+
         .nav-brand .letters {
             font-family: 'Fira Code', monospace;
-            font-size: 10px;
+            font-size: 13px;
             font-weight: 700;
             fill: var(--highlight-bright);
             letter-spacing: 1px;
             transition: fill 0.2s ease;
+        }
+
+        .nav-brand:hover .chip-trace {
+            stroke: rgba(96, 165, 250, 0.6);
+        }
+
+        .nav-brand:hover .chip-dot {
+            fill: rgba(96, 165, 250, 0.8);
         }
 
         .nav-brand:hover .chip-body {
@@ -963,31 +985,47 @@
     <!-- Navigation -->
     <nav>
         <a href="#" class="nav-brand">
-            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
-                <!-- Chip body -->
-                <rect class="chip-body" x="12" y="12" width="28" height="28" rx="2"/>
-                <!-- Inner circuit border -->
-                <rect class="chip-inner" x="16" y="16" width="20" height="20" rx="1"/>
-                <!-- Top pins -->
-                <line class="chip-pin" x1="19" y1="12" x2="19" y2="6"/>
-                <line class="chip-pin" x1="26" y1="12" x2="26" y2="6"/>
-                <line class="chip-pin" x1="33" y1="12" x2="33" y2="6"/>
-                <!-- Bottom pins -->
-                <line class="chip-pin" x1="19" y1="40" x2="19" y2="46"/>
-                <line class="chip-pin" x1="26" y1="40" x2="26" y2="46"/>
-                <line class="chip-pin" x1="33" y1="40" x2="33" y2="46"/>
+            <svg viewBox="-60 -4 172 44" xmlns="http://www.w3.org/2000/svg">
+                <!-- === LEFT CIRCUIT TRACES (running from left edge) === -->
+                <!-- Trace 1: straight in then zig to pin -->
+                <polyline class="chip-trace" points="-60,8 -20,8 -20,12 -8,12"/>
+                <circle class="chip-dot" cx="-20" cy="8" r="1.5"/>
+                <!-- Trace 2: drop then run to pin -->
+                <polyline class="chip-trace" points="-60,18 -30,18 -30,22 -8,22"/>
+                <circle class="chip-dot" cx="-30" cy="18" r="1.5"/>
+                <!-- Trace 3: short run to pin -->
+                <polyline class="chip-trace" points="-60,30 -15,30 -8,30"/>
+                <circle class="chip-dot" cx="-15" cy="30" r="1.5"/>
+
+                <!-- === RIGHT CIRCUIT TRACES (running to right edge) === -->
+                <!-- Trace 4 -->
+                <polyline class="chip-trace" points="60,8 25,8 25,12 8,12"/>
+                <circle class="chip-dot" cx="25" cy="8" r="1.5"/>
+                <!-- Trace 5 -->
+                <polyline class="chip-trace" points="60,20 30,20 30,22 8,22"/>
+                <circle class="chip-dot" cx="30" cy="20" r="1.5"/>
+                <!-- Trace 6 -->
+                <polyline class="chip-trace" points="60,32 18,32 8,32"/>
+                <circle class="chip-dot" cx="18" cy="32" r="1.5"/>
+
+                <!-- === CHIP BODY === -->
+                <rect class="chip-body" x="-8" y="2" width="68" height="32" rx="2"/>
+                <!-- Inner border -->
+                <rect class="chip-inner" x="-4" y="6" width="60" height="24" rx="1"/>
+                <!-- Notch indicator (top-left) -->
+                <path class="chip-inner" d="M-8,8 Q-8,2 -2,2" fill="none"/>
+
                 <!-- Left pins -->
-                <line class="chip-pin" x1="12" y1="19" x2="6" y2="19"/>
-                <line class="chip-pin" x1="12" y1="26" x2="6" y2="26"/>
-                <line class="chip-pin" x1="12" y1="33" x2="6" y2="33"/>
+                <line class="chip-pin" x1="-8" y1="12" x2="-14" y2="12"/>
+                <line class="chip-pin" x1="-8" y1="22" x2="-14" y2="22"/>
+                <line class="chip-pin" x1="-8" y1="30" x2="-14" y2="30"/>
                 <!-- Right pins -->
-                <line class="chip-pin" x1="40" y1="19" x2="46" y2="19"/>
-                <line class="chip-pin" x1="40" y1="26" x2="46" y2="26"/>
-                <line class="chip-pin" x1="40" y1="33" x2="46" y2="33"/>
-                <!-- Notch top-left corner indicator -->
-                <path class="chip-inner" d="M12,16 Q12,12 16,12" fill="none"/>
-                <!-- WV initials -->
-                <text class="letters" x="26" y="26" dominant-baseline="central" text-anchor="middle">WV</text>
+                <line class="chip-pin" x1="60" y1="12" x2="66" y2="12"/>
+                <line class="chip-pin" x1="60" y1="22" x2="66" y2="22"/>
+                <line class="chip-pin" x1="60" y1="32" x2="66" y2="32"/>
+
+                <!-- === WV INITIALS === -->
+                <text class="letters" x="26" y="18" dominant-baseline="central" text-anchor="middle">WV</text>
             </svg>
         </a>
         <div class="nav-links">
