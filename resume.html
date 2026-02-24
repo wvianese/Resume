@@ -258,46 +258,47 @@
         }
 
         .nav-brand svg {
-            width: 54px;
-            height: 36px;
+            width: 52px;
+            height: 52px;
             overflow: visible;
         }
 
-        .nav-brand .bg-diamond {
-            fill: none;
+        .nav-brand .chip-body {
+            fill: rgba(59, 130, 246, 0.08);
             stroke: var(--highlight);
-            stroke-width: 1px;
+            stroke-width: 1.2;
             transition: all 0.2s ease;
         }
 
-        .nav-brand .fill-diamond {
-            fill: rgba(59, 130, 246, 0.12);
-            transition: fill 0.2s ease;
+        .nav-brand .chip-pin {
+            stroke: var(--highlight);
+            stroke-width: 1.2;
+            stroke-linecap: square;
+            transition: stroke 0.2s ease;
+        }
+
+        .nav-brand .chip-inner {
+            fill: none;
+            stroke: rgba(59, 130, 246, 0.35);
+            stroke-width: 0.8;
         }
 
         .nav-brand .letters {
-            font-family: 'Inter', sans-serif;
-            font-size: 11px;
-            font-weight: 800;
+            font-family: 'Fira Code', monospace;
+            font-size: 10px;
+            font-weight: 700;
             fill: var(--highlight-bright);
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             transition: fill 0.2s ease;
         }
 
-        .nav-brand .slash {
-            font-family: 'Fira Code', monospace;
-            font-size: 9px;
-            font-weight: 400;
-            fill: var(--highlight);
-            opacity: 0.7;
-        }
-
-        .nav-brand:hover .bg-diamond {
+        .nav-brand:hover .chip-body {
+            fill: rgba(59, 130, 246, 0.2);
             stroke: var(--highlight-bright);
         }
 
-        .nav-brand:hover .fill-diamond {
-            fill: rgba(59, 130, 246, 0.25);
+        .nav-brand:hover .chip-pin {
+            stroke: var(--highlight-bright);
         }
 
         .nav-brand:hover .letters {
@@ -962,16 +963,31 @@
     <!-- Navigation -->
     <nav>
         <a href="#" class="nav-brand">
-            <svg viewBox="0 0 54 36" xmlns="http://www.w3.org/2000/svg">
-                <!-- Diamond background fill -->
-                <polygon class="fill-diamond" points="27,2 52,18 27,34 2,18"/>
-                <!-- Diamond outline -->
-                <polygon class="bg-diamond" points="27,2 52,18 27,34 2,18"/>
-                <!-- Small corner slash accents -->
-                <text class="slash" x="6" y="12">/</text>
-                <text class="slash" x="44" y="27">/</text>
-                <!-- WV letters -->
-                <text class="letters" x="27" y="18" dominant-baseline="central" text-anchor="middle">WV</text>
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+                <!-- Chip body -->
+                <rect class="chip-body" x="12" y="12" width="28" height="28" rx="2"/>
+                <!-- Inner circuit border -->
+                <rect class="chip-inner" x="16" y="16" width="20" height="20" rx="1"/>
+                <!-- Top pins -->
+                <line class="chip-pin" x1="19" y1="12" x2="19" y2="6"/>
+                <line class="chip-pin" x1="26" y1="12" x2="26" y2="6"/>
+                <line class="chip-pin" x1="33" y1="12" x2="33" y2="6"/>
+                <!-- Bottom pins -->
+                <line class="chip-pin" x1="19" y1="40" x2="19" y2="46"/>
+                <line class="chip-pin" x1="26" y1="40" x2="26" y2="46"/>
+                <line class="chip-pin" x1="33" y1="40" x2="33" y2="46"/>
+                <!-- Left pins -->
+                <line class="chip-pin" x1="12" y1="19" x2="6" y2="19"/>
+                <line class="chip-pin" x1="12" y1="26" x2="6" y2="26"/>
+                <line class="chip-pin" x1="12" y1="33" x2="6" y2="33"/>
+                <!-- Right pins -->
+                <line class="chip-pin" x1="40" y1="19" x2="46" y2="19"/>
+                <line class="chip-pin" x1="40" y1="26" x2="46" y2="26"/>
+                <line class="chip-pin" x1="40" y1="33" x2="46" y2="33"/>
+                <!-- Notch top-left corner indicator -->
+                <path class="chip-inner" d="M12,16 Q12,12 16,12" fill="none"/>
+                <!-- WV initials -->
+                <text class="letters" x="26" y="26" dominant-baseline="central" text-anchor="middle">WV</text>
             </svg>
         </a>
         <div class="nav-links">
