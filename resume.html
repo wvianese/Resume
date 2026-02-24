@@ -639,9 +639,11 @@
             display: block;
         }
 
-        .no-link {
-            pointer-events: none;
-            user-select: text;
+        a.project-image-wrapper {
+            display: block;
+            text-decoration: none;
+            border: none;
+            outline: none;
         }
 
         .project-card-overlay {
@@ -670,7 +672,7 @@
             gap: 0.5rem;
         }
 
-        .project-card.interactive:hover .project-card-overlay {
+        .project-image-wrapper:hover .project-card-overlay {
             opacity: 1;
         }
 
@@ -711,7 +713,7 @@
             transition: all 0.3s ease;
         }
 
-        .project-card.interactive:hover .project-image {
+        .project-image-wrapper:hover .project-image {
             opacity: 0.9;
         }
 
@@ -1067,19 +1069,19 @@
 
             <p class="projects-section-label">Personal Projects</p>
             <div class="projects-grid">
-                <a href="https://ferguson-map.netlify.app/" target="_blank" class="project-card interactive">
-                    <div class="project-image-wrapper">
+                <div class="project-card">
+                    <a href="https://ferguson-map.netlify.app/" target="_blank" class="project-image-wrapper">
                         <div class="project-card-overlay"><span>Visit Site ↗</span></div>
                         <img src="map-cover.png" alt="Ferguson Vacant Housing Interactive Map" class="project-image">
-                    </div>
-                    <h3 class="no-link">Interactive Ferguson Vacant Housing Map</h3>
-                    <p class="no-link">
+                    </a>
+                    <h3>Interactive Ferguson Vacant Housing Map</h3>
+                    <p>
                         Scraped, cleaned, and mapped every vacant property in Ferguson, MO into a live,
                         interactive geospatial tool. Built custom data pipelines to normalize address records
                         and visualize vacancy patterns with dynamic layer controls by neighborhood, street,
                         and property type.
                     </p>
-                    <div class="tech-tags no-link">
+                    <div class="tech-tags">
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">Folium</span>
                         <span class="tech-tag">Leaflet.js</span>
@@ -1087,21 +1089,21 @@
                         <span class="tech-tag">Data Visualization</span>
                         <span class="tech-tag">Web Scraping</span>
                     </div>
-                </a>
+                </div>
 
-                <a href="https://monopoly.up.railway.app/" target="_blank" class="project-card interactive">
-                    <div class="project-image-wrapper">
+                <div class="project-card">
+                    <a href="https://monopoly.up.railway.app/" target="_blank" class="project-image-wrapper">
                         <div class="project-card-overlay"><span>Visit Site ↗</span></div>
                         <img src="monopoly-screenshot.png" alt="Multiplayer Monopoly Game" class="project-image">
-                    </div>
-                    <h3 class="no-link">Multiplayer Monopoly</h3>
-                    <p class="no-link">
+                    </a>
+                    <h3>Multiplayer Monopoly</h3>
+                    <p>
                         Built a fully playable, real-time multiplayer Monopoly game from scratch — live on
                         the web, no download needed. Python game engine with FastAPI and WebSockets syncing
                         live state across all players. Full rule support: rent, railroads, utilities, jail,
                         bankruptcy, and animated dice. Share a 6-letter code and play instantly.
                     </p>
-                    <div class="tech-tags no-link">
+                    <div class="tech-tags">
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">FastAPI</span>
                         <span class="tech-tag">WebSockets</span>
@@ -1110,7 +1112,7 @@
                         <span class="tech-tag">Docker</span>
                         <span class="tech-tag">Railway</span>
                     </div>
-                </a>
+                </div>
             </div>
 
             <p class="projects-sub-label">Academic Projects</p>
