@@ -253,78 +253,26 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            position: relative;
+            gap: 6px;
             transition: opacity 0.2s ease;
         }
 
-        .nav-brand svg {
-            width: 52px;
-            height: 36px;
-            overflow: visible;
+        .nav-brand:hover {
+            opacity: 0.8;
         }
 
-        .nav-brand .chip-body {
-            fill: rgba(59, 130, 246, 0.08);
-            stroke: var(--highlight);
-            stroke-width: 1.2;
-            transition: all 0.2s ease;
-        }
-
-        .nav-brand .chip-pin {
-            stroke: var(--highlight);
-            stroke-width: 1.2;
-            stroke-linecap: square;
-            transition: stroke 0.2s ease;
-        }
-
-        .nav-brand .chip-inner {
-            fill: none;
-            stroke: rgba(59, 130, 246, 0.35);
-            stroke-width: 0.8;
-        }
-
-        .nav-brand .chip-trace {
-            fill: none;
-            stroke: rgba(59, 130, 246, 0.3);
-            stroke-width: 1;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            transition: stroke 0.2s ease;
-        }
-
-        .nav-brand .chip-dot {
-            fill: rgba(59, 130, 246, 0.5);
-            transition: fill 0.2s ease;
-        }
-
-        .nav-brand .letters {
+        .brand-initials {
             font-family: 'Fira Code', monospace;
-            font-size: 13px;
+            font-size: 18px;
             font-weight: 700;
-            fill: var(--highlight-bright);
+            color: #3b82f6;
             letter-spacing: 1px;
-            transition: fill 0.2s ease;
         }
 
-        .nav-brand:hover .chip-trace {
-            stroke: rgba(96, 165, 250, 0.6);
-        }
-
-        .nav-brand:hover .chip-dot {
-            fill: rgba(96, 165, 250, 0.8);
-        }
-
-        .nav-brand:hover .chip-body {
-            fill: rgba(59, 130, 246, 0.2);
-            stroke: var(--highlight-bright);
-        }
-
-        .nav-brand:hover .chip-pin {
-            stroke: var(--highlight-bright);
-        }
-
-        .nav-brand:hover .letters {
-            fill: #fff;
+        .brand-icon {
+            height: 28px;
+            width: 28px;
+            object-fit: contain;
         }
 
         .nav-links {
@@ -986,48 +934,8 @@
     <!-- Navigation -->
     <nav>
         <a href="#" class="nav-brand">
-            <svg viewBox="-60 -4 172 44" xmlns="http://www.w3.org/2000/svg">
-                <!-- === LEFT CIRCUIT TRACES (running from left edge) === -->
-                <!-- Trace 1: straight in then zig to pin -->
-                <polyline class="chip-trace" points="-60,8 -20,8 -20,12 -8,12"/>
-                <circle class="chip-dot" cx="-20" cy="8" r="1.5"/>
-                <!-- Trace 2: drop then run to pin -->
-                <polyline class="chip-trace" points="-60,18 -30,18 -30,22 -8,22"/>
-                <circle class="chip-dot" cx="-30" cy="18" r="1.5"/>
-                <!-- Trace 3: short run to pin -->
-                <polyline class="chip-trace" points="-60,30 -15,30 -8,30"/>
-                <circle class="chip-dot" cx="-15" cy="30" r="1.5"/>
-
-                <!-- === RIGHT CIRCUIT TRACES (running to right edge) === -->
-                <!-- Trace 4 -->
-                <polyline class="chip-trace" points="60,8 25,8 25,12 8,12"/>
-                <circle class="chip-dot" cx="25" cy="8" r="1.5"/>
-                <!-- Trace 5 -->
-                <polyline class="chip-trace" points="60,20 30,20 30,22 8,22"/>
-                <circle class="chip-dot" cx="30" cy="20" r="1.5"/>
-                <!-- Trace 6 -->
-                <polyline class="chip-trace" points="60,32 18,32 8,32"/>
-                <circle class="chip-dot" cx="18" cy="32" r="1.5"/>
-
-                <!-- === CHIP BODY === -->
-                <rect class="chip-body" x="-8" y="2" width="68" height="32" rx="2"/>
-                <!-- Inner border -->
-                <rect class="chip-inner" x="-4" y="6" width="60" height="24" rx="1"/>
-                <!-- Notch indicator (top-left) -->
-                <path class="chip-inner" d="M-8,8 Q-8,2 -2,2" fill="none"/>
-
-                <!-- Left pins -->
-                <line class="chip-pin" x1="-8" y1="12" x2="-14" y2="12"/>
-                <line class="chip-pin" x1="-8" y1="22" x2="-14" y2="22"/>
-                <line class="chip-pin" x1="-8" y1="30" x2="-14" y2="30"/>
-                <!-- Right pins -->
-                <line class="chip-pin" x1="60" y1="12" x2="66" y2="12"/>
-                <line class="chip-pin" x1="60" y1="22" x2="66" y2="22"/>
-                <line class="chip-pin" x1="60" y1="32" x2="66" y2="32"/>
-
-                <!-- === WV INITIALS === -->
-                <text class="letters" x="26" y="18" dominant-baseline="central" text-anchor="middle">WV</text>
-            </svg>
+            <span class="brand-initials">WV</span>
+            <img src="nn-logo.png" alt="Neural Network Logo" class="brand-icon">
         </a>
         <div class="nav-links">
             <a href="#education">Education</a>
