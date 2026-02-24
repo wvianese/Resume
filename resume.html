@@ -250,80 +250,62 @@
         }
 
         .nav-brand {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--highlight-bright);
-            letter-spacing: 0.12em;
             text-decoration: none;
-            font-family: 'Fira Code', monospace;
-            border: 1.5px solid var(--highlight);
-            padding: 0.3rem 0.7rem;
-            position: relative;
-            overflow: hidden;
-            animation: glitch-idle 6s infinite;
-        }
-
-        /* Scan line sweep */
-        .nav-brand::before {
-            content: '';
-            position: absolute;
-            left: 0; right: 0;
-            height: 2px;
-            background: rgba(96, 165, 250, 0.5);
-            top: -2px;
-            animation: scanline 3s linear infinite;
-            pointer-events: none;
-        }
-
-        /* Glitch color clone */
-        .nav-brand::after {
-            content: 'WV';
-            position: absolute;
-            inset: 0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: #f472b6;
-            opacity: 0;
-            clip-path: inset(0 0 0 0);
-            animation: glitch-clone 6s infinite;
-            pointer-events: none;
-            padding: 0.3rem 0.7rem;
+            position: relative;
         }
 
-        @keyframes scanline {
-            0%   { top: -2px; opacity: 0; }
-            10%  { opacity: 1; }
-            90%  { opacity: 1; }
-            100% { top: calc(100% + 2px); opacity: 0; }
+        .nav-brand svg {
+            width: 48px;
+            height: 32px;
+            overflow: visible;
         }
 
-        @keyframes glitch-idle {
-            0%, 90%, 100% { transform: translate(0); filter: none; }
-            91%  { transform: translate(-2px, 0); filter: brightness(1.3); }
-            92%  { transform: translate(2px, 0);  filter: brightness(0.9); }
-            93%  { transform: translate(0); filter: none; }
-            95%  { transform: translate(-1px, 1px); }
-            96%  { transform: translate(0); }
+        /* Animated corner brackets */
+        .nav-brand .bracket {
+            fill: none;
+            stroke: var(--highlight);
+            stroke-width: 1.5;
+            stroke-linecap: square;
+            transition: stroke 0.3s ease;
         }
 
-        @keyframes glitch-clone {
-            0%, 90%, 100% { opacity: 0; transform: translate(0); }
-            91% { opacity: 0.7; transform: translate(3px, 0); clip-path: inset(20% 0 60% 0); }
-            92% { opacity: 0.5; transform: translate(-3px, 0); clip-path: inset(60% 0 10% 0); }
-            93% { opacity: 0; }
+        .nav-brand .tl { stroke-dasharray: 14; stroke-dashoffset: 14; animation: draw-bracket 0.6s ease forwards 0.8s; }
+        .nav-brand .tr { stroke-dasharray: 14; stroke-dashoffset: 14; animation: draw-bracket 0.6s ease forwards 1.0s; }
+        .nav-brand .bl { stroke-dasharray: 14; stroke-dashoffset: 14; animation: draw-bracket 0.6s ease forwards 1.2s; }
+        .nav-brand .br { stroke-dasharray: 14; stroke-dashoffset: 14; animation: draw-bracket 0.6s ease forwards 1.4s; }
+
+        @keyframes draw-bracket {
+            to { stroke-dashoffset: 0; }
         }
 
-        .nav-brand:hover {
-            color: #fff;
-            background: var(--highlight);
-            animation: glitch-hover 0.4s steps(1) infinite;
+        .nav-brand .letters {
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            fill: var(--highlight-bright);
+            letter-spacing: 2px;
         }
 
-        @keyframes glitch-hover {
-            0%   { box-shadow: 0 0 8px rgba(59,130,246,0.6), 0 0 20px rgba(59,130,246,0.3); }
-            50%  { box-shadow: 0 0 12px rgba(96,165,250,0.8), 0 0 30px rgba(59,130,246,0.4); }
-            100% { box-shadow: 0 0 8px rgba(59,130,246,0.6), 0 0 20px rgba(59,130,246,0.3); }
+        .nav-brand .dot {
+            fill: var(--highlight-bright);
+            animation: pulse-brand 2.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-brand {
+            0%, 100% { opacity: 1; r: 1.5px; }
+            50%       { opacity: 0.3; r: 1px; }
+        }
+
+        /* Hover: brackets glow and converge slightly */
+        .nav-brand:hover .bracket {
+            stroke: var(--highlight-bright);
+            filter: drop-shadow(0 0 4px rgba(96,165,250,0.8));
+        }
+
+        .nav-brand:hover .letters {
+            fill: #fff;
         }
 
         .nav-links {
@@ -983,7 +965,19 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="#" class="nav-brand">WV</a>
+        <a href="#" class="nav-brand">
+            <svg viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
+                <!-- Corner brackets -->
+                <polyline class="bracket tl" points="14,4 4,4 4,14"/>
+                <polyline class="bracket tr" points="34,4 44,4 44,14"/>
+                <polyline class="bracket bl" points="14,28 4,28 4,18"/>
+                <polyline class="bracket br" points="34,28 44,28 44,18"/>
+                <!-- WV letters -->
+                <text class="letters" x="50%" y="50%" dominant-baseline="central" text-anchor="middle">WV</text>
+                <!-- Pulsing dot accent -->
+                <circle class="dot" cx="44" cy="4" r="1.5"/>
+            </svg>
+        </a>
         <div class="nav-links">
             <a href="#education">Education</a>
             <a href="#projects">Projects</a>
