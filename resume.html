@@ -234,9 +234,10 @@
             right: 0;
             z-index: 100;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
             gap: 0.25rem;
-            padding: 0.6rem 2.5rem;
+            padding: 0.85rem 2.5rem;
             background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -248,19 +249,64 @@
             to { opacity: 1; }
         }
 
+        .nav-brand {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--highlight-bright);
+            letter-spacing: 0.08em;
+            text-decoration: none;
+            font-family: 'Fira Code', monospace;
+            transition: opacity 0.2s ease;
+        }
+
+        .nav-brand:hover {
+            opacity: 0.75;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+        }
+
         nav a {
             color: var(--text-dim);
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 500;
             letter-spacing: 0.06em;
             text-transform: uppercase;
             padding: 0.35rem 0.85rem;
             transition: color 0.2s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0.85rem;
+            right: 0.85rem;
+            height: 1.5px;
+            background: var(--highlight-bright);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.2s ease;
         }
 
         nav a:hover {
             color: var(--highlight-bright);
+        }
+
+        nav a:hover::after {
+            transform: scaleX(1);
+        }
+
+        nav a.active {
+            color: var(--highlight-bright);
+        }
+
+        nav a.active::after {
+            transform: scaleX(1);
         }
 
         /* Sections */
@@ -874,12 +920,15 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="#education">Education</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#activities">Activities</a>
-        <a href="#contact">Contact</a>
+        <a href="#" class="nav-brand">WV</a>
+        <div class="nav-links">
+            <a href="#education">Education</a>
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#activities">Activities</a>
+            <a href="#contact">Contact</a>
+        </div>
     </nav>
 
     <div class="container">
@@ -1298,6 +1347,21 @@
     </footer>
 
     <script>
+        // Active nav link on scroll
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section');
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const id = entry.target.getAttribute('id');
+                    const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+            });
+        }, { threshold: 0.3 });
+        sections.forEach(s => sectionObserver.observe(s));
+
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
