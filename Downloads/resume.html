@@ -347,6 +347,15 @@
             justify-content: center;
         }
 
+        #projects,
+        #experience,
+        #skills,
+        #activities,
+        #contact {
+            content-visibility: auto;
+            contain-intrinsic-size: 900px;
+        }
+
         #activities, #contact {
             min-height: unset;
             justify-content: flex-start;
@@ -1231,7 +1240,7 @@
             <div class="hero-content">
                 <div class="hero-name-section">
                     <div class="profile-photo-wrapper"><img src="profile-photo.jpg" alt="Will Vianese" class="profile-photo" fetchpriority="high" decoding="async"></div>
-                    <h1>Will Vianese</h1>
+                    <h1 data-final-name="Will Vianese">############</h1>
                 </div>
                 <div class="subtitle">Mathematics & Computer Science • Environmental Analysis</div>
                 <p class="tagline">
@@ -1272,7 +1281,7 @@
 
             <div class="education-item">
                 <div class="university-header">
-                    <img src="hopkins-logo.png" alt="Hopkins School Logo" class="university-logo" loading="lazy" decoding="async">
+                    <img src="hopkins-logo.png" alt="Hopkins School Logo" class="university-logo" loading="lazy" decoding="async" fetchpriority="low">
                     <h3>Hopkins School</h3>
                 </div>
                 <div class="degree">High School</div>
@@ -1289,7 +1298,7 @@
                 <div class="project-card">
                     <a href="https://ferguson-map.netlify.app/" target="_blank" class="project-image-wrapper">
                         <div class="project-card-overlay"><span>Visit Site ↗</span></div>
-                        <img src="map-cover.png" alt="Ferguson Vacant Housing Interactive Map" class="project-image" loading="lazy" decoding="async">
+                        <img src="map-cover.png" alt="Ferguson Vacant Housing Interactive Map" class="project-image" loading="lazy" decoding="async" fetchpriority="low">
                     </a>
                     <h3>Ferguson Abandonment Analysis Map</h3>
                     <p>
@@ -1309,7 +1318,7 @@
                 <div class="project-card">
                     <a href="https://monopoly.up.railway.app/" target="_blank" class="project-image-wrapper">
                         <div class="project-card-overlay"><span>Visit Site ↗</span></div>
-                        <img src="monopoly-screenshot.png" alt="Multiplayer Monopoly Game" class="project-image" loading="lazy" decoding="async">
+                        <img src="monopoly-screenshot.png" alt="Multiplayer Monopoly Game" class="project-image" loading="lazy" decoding="async" fetchpriority="low">
                     </a>
                     <h3>Multiplayer Monopoly</h3>
                     <p>
@@ -1370,7 +1379,7 @@
 
             <div class="education-item">
                 <div class="company-header">
-                    <img src="camp-emerson-logo.png" alt="Camp Emerson Logo" class="company-logo" loading="lazy" decoding="async">
+                    <img src="camp-emerson-logo.png" alt="Camp Emerson Logo" class="company-logo" loading="lazy" decoding="async" fetchpriority="low">
                     <h3>Camp Emerson | Hinsdale, MA</h3>
                 </div>
                 <div class="degree">Data & Systems Manager</div>
@@ -1397,7 +1406,7 @@
 
             <div class="education-item">
                 <div class="company-header">
-                    <img src="camp-emerson-logo.png" alt="Camp Emerson Logo" class="company-logo" loading="lazy" decoding="async">
+                    <img src="camp-emerson-logo.png" alt="Camp Emerson Logo" class="company-logo" loading="lazy" decoding="async" fetchpriority="low">
                     <h3>Camp Emerson | Hinsdale, MA</h3>
                 </div>
                 <div class="degree">Program Director</div>
@@ -1424,7 +1433,7 @@
 
             <div class="education-item">
                 <div class="company-header">
-                    <img src="camp-emerson-logo.png" alt="Camp Emerson Logo" class="company-logo" loading="lazy" decoding="async">
+                    <img src="camp-emerson-logo.png" alt="Camp Emerson Logo" class="company-logo" loading="lazy" decoding="async" fetchpriority="low">
                     <h3>Camp Emerson | Hinsdale, MA</h3>
                 </div>
                 <div class="degree">Wilderness Director</div>
@@ -1447,7 +1456,7 @@
 
             <div class="education-item">
                 <div class="company-header">
-                    <img src="camp-emerson-logo.png" alt="Camp Emerson Logo" class="company-logo" loading="lazy" decoding="async">
+                    <img src="camp-emerson-logo.png" alt="Camp Emerson Logo" class="company-logo" loading="lazy" decoding="async" fetchpriority="low">
                     <h3>Camp Emerson | Hinsdale, MA</h3>
                 </div>
                 <div class="degree">Youth Development Specialist & Wilderness Instructor</div>
@@ -1551,10 +1560,10 @@
         <!-- Activities & Awards Section -->
         <section id="activities">
             <h2 class="section-title">Activities & Awards</h2>
-            <img src="rowing-action.jpg" alt="Washington University Rowing Team in Action" class="section-hero-image" loading="lazy" decoding="async">
+            <img src="rowing-action.jpg" alt="Washington University Rowing Team in Action" class="section-hero-image" loading="lazy" decoding="async" fetchpriority="low">
             <div class="education-item">
                 <div class="university-header">
-                    <img src="washu-logo.png" alt="Washington University Logo" class="university-logo" loading="lazy" decoding="async">
+                    <img src="washu-logo.png" alt="Washington University Logo" class="university-logo" loading="lazy" decoding="async" fetchpriority="low">
                     <h3>Washington University Rowing Team</h3>
                 </div>
                 <div class="degree">Coach and Coxswain</div>
@@ -1755,13 +1764,10 @@
             const nameElement = document.querySelector('h1');
             const fx = new TextScramble(nameElement);
 
-            // Start with scrambled text
-            nameElement.innerText = '############';
-
             // Animate to real name after a short delay
             setTimeout(() => {
-                fx.setText('Will Vianese');
-            }, 120);
+                fx.setText(nameElement.dataset.finalName || 'Will Vianese');
+            }, 40);
         });
 
         // Aurora streak background
@@ -1806,7 +1812,11 @@
 
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
-        draw();
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                draw();
+            }, 180);
+        });
     </script>
 </body>
 </html>
