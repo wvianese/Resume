@@ -188,9 +188,6 @@
         }
 
         .dud {
-            display: inline-block;
-            min-width: 0.62em;
-            text-align: center;
             opacity: 0.72;
         }
 
@@ -1052,11 +1049,11 @@
             .tagline {
                 font-size: 1rem;
                 max-width: 32rem;
-                padding: 0.9rem 1.1rem;
-                border: 1px solid rgba(59, 130, 246, 0.28);
-                border-left: 3px solid var(--highlight);
-                border-radius: 14px;
-                background: rgba(30, 41, 59, 0.55);
+                padding: 0;
+                border: none;
+                border-left: none;
+                border-radius: 0;
+                background: transparent;
                 margin-left: auto;
                 margin-right: auto;
                 margin-bottom: 1rem;
@@ -1694,7 +1691,7 @@
         class TextScramble {
             constructor(el) {
                 this.el = el;
-                this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
                 this.update = this.update.bind(this);
             }
 
@@ -1709,8 +1706,8 @@
                     const from = oldText[i] || '';
                     const to = newText[i] || '';
                     // Sequential start times with overlap - faster animation
-                    const start = i * 2;
-                    const end = start + 12;
+                    const start = i * 3;
+                    const end = start + 18;
                     this.queue.push({ from, to, start, end });
                 }
 
@@ -1731,8 +1728,7 @@
                         complete++;
                         output += to;
                     } else if (this.frame >= start) {
-                        // Keep swaps infrequent so the text feels smoother than jittery.
-                        if (!char || Math.random() < 0.08) {
+                        if (!char || Math.random() < 0.18) {
                             char = this.randomChar();
                             this.queue[i].char = char;
                         }
@@ -1771,7 +1767,7 @@
             // Animate to real name after a short delay
             setTimeout(() => {
                 fx.setText('Will Vianese');
-            }, 140);
+            }, 120);
         }, { once: true });
 
         // Aurora streak background
