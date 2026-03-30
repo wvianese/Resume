@@ -1049,9 +1049,9 @@
             .tagline {
                 font-size: 1rem;
                 max-width: 32rem;
-                padding: 0;
+                padding: 0 0 0 0.9rem;
                 border: none;
-                border-left: none;
+                border-left: 2px solid var(--highlight-bright);
                 border-radius: 0;
                 background: transparent;
                 margin-left: auto;
@@ -1127,6 +1127,7 @@
                 margin-left: auto;
                 margin-right: auto;
                 align-self: center;
+                width: fit-content;
             }
 
             .scroll-down {
@@ -1706,8 +1707,8 @@
                     const from = oldText[i] || '';
                     const to = newText[i] || '';
                     // Sequential start times with overlap - faster animation
-                    const start = i * 3;
-                    const end = start + 18;
+                    const start = i * 4;
+                    const end = start + 35;
                     this.queue.push({ from, to, start, end });
                 }
 
@@ -1728,7 +1729,7 @@
                         complete++;
                         output += to;
                     } else if (this.frame >= start) {
-                        if (!char || Math.random() < 0.18) {
+                        if (!char || Math.random() < 0.2) {
                             char = this.randomChar();
                             this.queue[i].char = char;
                         }
@@ -1751,6 +1752,12 @@
             randomChar() {
                 return this.chars[Math.floor(Math.random() * this.chars.length)];
             }
+
+            randomText(length) {
+                let output = '';
+                for (let i = 0; i < length; i++) output += this.randomChar();
+                return output;
+            }
         }
 
         // Trigger scramble animation on page load
@@ -1761,13 +1768,13 @@
             const fx = new TextScramble(nameElement);
 
             // Start with scrambled text
-            nameElement.textContent = '############';
+            nameElement.textContent = fx.randomText('Will Vianese'.length);
             nameElement.style.visibility = 'visible';
 
             // Animate to real name after a short delay
             setTimeout(() => {
                 fx.setText('Will Vianese');
-            }, 120);
+            }, 300);
         }, { once: true });
 
         // Aurora streak background
