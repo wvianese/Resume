@@ -184,6 +184,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            visibility: hidden;
         }
 
         .subtitle {
@@ -1001,7 +1002,7 @@
 
             header {
                 min-height: auto;
-                padding: 11.75rem 0 3rem;
+                padding: 11rem 0 3rem;
                 align-items: center;
             }
 
@@ -1147,7 +1148,7 @@
 
         @media (max-width: 560px) {
             header {
-                padding-top: 12.5rem;
+                padding-top: 11.75rem;
             }
 
             section {
@@ -1746,16 +1747,19 @@
         // Trigger scramble animation on page load
         window.addEventListener('DOMContentLoaded', () => {
             const nameElement = document.querySelector('h1');
+            if (!nameElement || nameElement.dataset.scrambleReady === 'true') return;
+            nameElement.dataset.scrambleReady = 'true';
             const fx = new TextScramble(nameElement);
 
             // Start with scrambled text
-            nameElement.innerText = '############';
+            nameElement.textContent = '############';
+            nameElement.style.visibility = 'visible';
 
             // Animate to real name after a short delay
             setTimeout(() => {
                 fx.setText('Will Vianese');
             }, 300);
-        });
+        }, { once: true });
 
         // Aurora streak background
         const canvas = document.getElementById('particle-canvas');
