@@ -1681,7 +1681,7 @@
         class TextScramble {
             constructor(el) {
                 this.el = el;
-                this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
+                this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 this.update = this.update.bind(this);
             }
 
@@ -1696,8 +1696,8 @@
                     const from = oldText[i] || '';
                     const to = newText[i] || '';
                     // Sequential start times with overlap - faster animation
-                    const start = i * 2;
-                    const end = start + 16;
+                    const start = i;
+                    const end = start + 10;
                     this.queue.push({ from, to, start, end });
                 }
 
@@ -1718,8 +1718,8 @@
                         complete++;
                         output += to;
                     } else if (this.frame >= start) {
-                        // Scramble with 20% chance to change each frame (smoother)
-                        if (!char || Math.random() < 0.2) {
+                        // Keep swaps infrequent so the text feels smoother than jittery.
+                        if (!char || Math.random() < 0.08) {
                             char = this.randomChar();
                             this.queue[i].char = char;
                         }
@@ -1758,7 +1758,7 @@
             // Animate to real name after a short delay
             setTimeout(() => {
                 fx.setText('Will Vianese');
-            }, 120);
+            }, 90);
         }, { once: true });
 
         // Aurora streak background
