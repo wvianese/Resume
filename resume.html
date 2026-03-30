@@ -1751,7 +1751,7 @@
         }
 
         // Trigger scramble animation on page load
-        window.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('load', () => {
             const nameElement = document.querySelector('h1');
             const fx = new TextScramble(nameElement);
 
@@ -1761,7 +1761,7 @@
             // Animate to real name after a short delay
             setTimeout(() => {
                 fx.setText('Will Vianese');
-            }, 300);
+            }, 120);
         });
 
         // Aurora streak background
