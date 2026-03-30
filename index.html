@@ -1759,8 +1759,8 @@
             }
         }
 
-        // Trigger scramble animation on page load
-        window.addEventListener('load', () => {
+        // Trigger scramble animation as soon as the landing content is ready.
+        window.addEventListener('DOMContentLoaded', () => {
             const nameElement = document.querySelector('h1');
             const fx = new TextScramble(nameElement);
 
@@ -1812,11 +1812,7 @@
 
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                draw();
-            }, 180);
-        });
+        draw();
     </script>
 </body>
 </html>
