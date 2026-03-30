@@ -1696,8 +1696,8 @@
                     const from = oldText[i] || '';
                     const to = newText[i] || '';
                     // Sequential start times with overlap - faster animation
-                    const start = i;
-                    const end = start + 10;
+                    const start = i * 2;
+                    const end = start + 12;
                     this.queue.push({ from, to, start, end });
                 }
 
@@ -1758,7 +1758,7 @@
             // Animate to real name after a short delay
             setTimeout(() => {
                 fx.setText('Will Vianese');
-            }, 90);
+            }, 140);
         }, { once: true });
 
         // Aurora streak background
