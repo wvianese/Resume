@@ -1637,17 +1637,28 @@
         // Active nav link on scroll
         const navLinks = document.querySelectorAll('.nav-links a');
         const sections = document.querySelectorAll('section');
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(link => link.classList.remove('active'));
-                    const id = entry.target.getAttribute('id');
-                    const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
-                    if (activeLink) activeLink.classList.add('active');
+
+        function updateActiveNav() {
+            const nav = document.querySelector('nav');
+            const navOffset = (nav ? nav.offsetHeight : 0) + 24;
+            let activeSection = sections[0];
+
+            sections.forEach(section => {
+                const top = section.offsetTop - navOffset;
+                if (window.scrollY >= top) {
+                    activeSection = section;
                 }
             });
-        }, { threshold: 0.3 });
-        sections.forEach(s => sectionObserver.observe(s));
+
+            navLinks.forEach(link => link.classList.remove('active'));
+            const id = activeSection.getAttribute('id');
+            const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+            if (activeLink) activeLink.classList.add('active');
+        }
+
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+        window.addEventListener('resize', updateActiveNav);
+        updateActiveNav();
 
         // WV brand scrolls to top
         document.querySelector('.nav-brand').addEventListener('click', function(e) {
