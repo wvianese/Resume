@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>William J Vianese - Math & CS Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --text: #eee;
+            --text-dim: #a8a8b3;
+            --bg-pattern: #0a0a14;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-pattern);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated geometric background */
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .geo-shape {
+            position: absolute;
+            border: 2px solid var(--highlight);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .geo-shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 5%;
+            transform: rotate(45deg);
+            animation-delay: 0s;
+        }
+
+        .geo-shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 10%;
+            border-radius: 50%;
+            animation-delay: 3s;
+        }
+
+        .geo-shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 15%;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation-delay: 6s;
+        }
+
+        .geo-shape:nth-child(4) {
+            width: 120px;
+            height: 120px;
+            top: 40%;
+            right: 25%;
+            transform: rotate(30deg);
+            animation-delay: 9s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.03;
+            }
+            50% {
+                transform: translateY(-30px) rotate(180deg);
+                opacity: 0.08;
+            }
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header/Hero */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .hero-content {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, var(--text) 0%, var(--highlight) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            color: var(--text-dim);
+            border-left: 3px solid var(--highlight);
+            padding-left: 1.5rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--highlight);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--text);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 4rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 3rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::before {
+            content: '//';
+            position: absolute;
+            left: -3rem;
+            color: var(--highlight);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Education */
+        .education-item {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--highlight);
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            animation: fadeInLeft 0.8s ease-out forwards;
+        }
+
+        .education-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .education-item:hover {
+            transform: translateX(10px);
+            box-shadow: -10px 10px 30px rgba(233, 69, 96, 0.2);
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .education-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .education-item .degree {
+            color: var(--highlight);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-item .date {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--secondary);
+            padding: 2rem;
+            border: 2px solid var(--accent);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        .project-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .project-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--highlight) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--highlight);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-card p {
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-tag {
+            background: var(--accent);
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+            border: 1px solid var(--highlight);
+            color: var(--text);
+        }
+
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .skill-category:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .skill-category:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .skill-category h3 {
+            color: var(--highlight);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .skill-category li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--highlight);
+        }
+
+        /* Contact */
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 2rem;
+            background: var(--secondary);
+            border: 2px solid var(--accent);
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .contact-link:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .contact-link:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .contact-link:hover {
+            border-color: var(--highlight);
+            transform: scale(1.05);
+            background: var(--accent);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                top: 1rem;
+                right: 1rem;
+                gap: 1rem;
+            }
+
+            .section-title::before {
+                display: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Geometric background -->
+    <div class="background-pattern">
+        <div class="geo-shape"></div>
+        <div class="geo-shape"></div>
+        <div class="geo-shape"></div>
+        <div class="geo-shape"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#activities">Activities</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header>
+            <div class="hero-content">
+                <h1>William J Vianese</h1>
+                <div class="subtitle">Mathematics & Computer Science • Environmental Analysis</div>
+                <p class="tagline">
+                    Data science and software engineering student building solutions through
+                    machine learning, algorithms, and systems optimization.
+                </p>
+            </div>
+        </header>
+
+        <!-- Education Section -->
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <h3>Washington University in St. Louis</h3>
+                <div class="degree">Bachelor of Arts - Double Major: Mathematics & Computer Science • Environmental Analysis</div>
+                <div class="date">Expected Graduation: May 2026 | St. Louis, MO</div>
+                <p style="margin-top: 1rem; color: var(--text-dim);">
+                    <strong>GPA: 3.82/4.00</strong> | Dean's List (Spring 2023, Fall 2023, Fall 2024)
+                </p>
+                <p style="margin-top: 0.5rem; color: var(--text-dim);">
+                    <strong>Relevant Coursework:</strong> Data Science, Data Mining, Artificial Intelligence,
+                    Analysis of Algorithms, Algorithms for Nonlinear Optimization, Data Structures,
+                    Dynamics & Computation, Financial Mathematics, Probability & Statistics,
+                    Matrix Algebra, Applied Mathematics
+                </p>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Dimensionality Reduction & Classification Analysis</h3>
+                    <p>
+                        Applied principal component analysis (PCA) to reduce feature dimensionality
+                        and analyze information retention. Implemented and compared multiple classification
+                        models including logistic regression, k-NN, and decision trees. Evaluated model
+                        performance using accuracy metrics and confusion matrices.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Scikit-Learn</span>
+                        <span class="tech-tag">PCA</span>
+                        <span class="tech-tag">ML</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Predictive Modeling Workflow & Model Comparison</h3>
+                    <p>
+                        Built an end-to-end predictive modeling workflow including data preprocessing,
+                        feature selection, training, and evaluation. Compared multiple predictive models
+                        to assess generalization behavior and performance using quantitative metrics.
+                        Communicated findings through structured technical reports with visualizations.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">NumPy</span>
+                        <span class="tech-tag">Matplotlib</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Autonomous Agent Design Using Search & RL</h3>
+                    <p>
+                        Implemented classical search algorithms including DFS, BFS, Uniform Cost Search,
+                        and A*. Built adversarial agents using Minimax and Alpha-Beta pruning. Developed
+                        reinforcement learning agents via value iteration and Q-learning. Evaluated agent
+                        behavior across environments with varying constraints and reward structures.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">AI</span>
+                        <span class="tech-tag">Reinforcement Learning</span>
+                        <span class="tech-tag">Search Algorithms</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <h2 class="section-title">Experience</h2>
+            <div class="education-item">
+                <h3>Camp Emerson</h3>
+                <div class="degree">Data & Systems Manager, Program Director, Wilderness Director, and Counselor</div>
+                <div class="date">May 2022 – August 2025 | Hinsdale, MA</div>
+                <ul style="margin-top: 1rem; color: var(--text-dim); list-style: none; padding-left: 0;">
+                    <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--highlight);">▹</span>
+                        Progressed across four roles to own and optimize core operational systems supporting 285+ users and 80+ staff, spanning enrollment, scheduling, transportation, billing, and compliance
+                    </li>
+                    <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--highlight);">▹</span>
+                        Designed and implemented automated workflows and process improvements to improve data consistency, reduce manual operations, and improve system reliability
+                    </li>
+                    <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--highlight);">▹</span>
+                        Performed data analysis and reporting on enrollment trends, logistical constraints, financial activity, and staffing needs to support leadership decisions
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul>
+                        <li>Python</li>
+                        <li>Java</li>
+                        <li>R</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Libraries & Frameworks</h3>
+                    <ul>
+                        <li>Pandas</li>
+                        <li>NumPy</li>
+                        <li>Matplotlib</li>
+                        <li>Seaborn</li>
+                        <li>Scikit-Learn</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools & Technologies</h3>
+                    <ul>
+                        <li>Google Suite</li>
+                        <li>Microsoft Suite</li>
+                        <li>GitHub</li>
+                        <li>Zoom</li>
+                        <li>Slack</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activities & Awards Section -->
+        <section id="activities">
+            <h2 class="section-title">Activities & Awards</h2>
+            <div class="education-item">
+                <h3>Washington University Rowing Team</h3>
+                <div class="degree">Coach and Coxswain</div>
+                <div class="date">August 2022 – Present | St. Louis, MO</div>
+                <ul style="margin-top: 1rem; color: var(--text-dim); list-style: none; padding-left: 0;">
+                    <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--highlight);">▹</span>
+                        Lead workouts, dieting, and recovery in conjunction with motivating and organizing the rowers
+                    </li>
+                    <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--highlight);">▹</span>
+                        Employ critical and quick-thinking skills to practice effectively on the water and land
+                    </li>
+                    <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--highlight);">▹</span>
+                        Leverage strong interpersonal skills to promote team cohesion and expand motivation
+                    </li>
+                </ul>
+                <div style="margin-top: 1rem;">
+                    <div style="color: var(--highlight); font-weight: 700; margin-bottom: 0.5rem;">Recognitions:</div>
+                    <ul style="color: var(--text-dim); list-style: none; padding-left: 0;">
+                        <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--highlight);">▹</span>
+                            Selected as ACRA Third Team All American Coxswain (2024)
+                        </li>
+                        <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--highlight);">▹</span>
+                            Selected as ACRA All Regional Coxswain in the Plains Region (2023, 2024)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-links">
+                <a href="mailto:willv2003@icloud.com" class="contact-link">
+                    <span class="contact-icon">📧</span>
+                    <div>
+                        <div style="font-weight: 700;">Email</div>
+                        <div style="font-size: 0.9rem; color: var(--text-dim);">willv2003@icloud.com</div>
+                    </div>
+                </a>
+
+                <a href="tel:+12038001028" class="contact-link">
+                    <span class="contact-icon">📱</span>
+                    <div>
+                        <div style="font-weight: 700;">Phone</div>
+                        <div style="font-size: 0.9rem; color: var(--text-dim);">(203) 800-1028</div>
+                    </div>
+                </a>
+
+                <a href="https://linkedin.com/in/will-vianese" target="_blank" class="contact-link">
+                    <span class="contact-icon">🔗</span>
+                    <div>
+                        <div style="font-weight: 700;">LinkedIn</div>
+                        <div style="font-size: 0.9rem; color: var(--text-dim);">linkedin.com/in/will-vianese</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 William J Vianese. Designed with mathematics and code.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

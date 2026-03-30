@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Will Vianese - Math & CS Portfolio</title>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KYJTRWX183"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-KYJTRWX183');
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -140,20 +148,29 @@
             flex-wrap: wrap;
         }
 
-        .profile-photo {
+        .profile-photo-wrapper {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            object-fit: cover;
-            object-position: center 20%;
+            overflow: hidden;
             border: 4px solid var(--highlight);
             box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
+            flex-shrink: 0;
         }
 
-        .profile-photo:hover {
+        .profile-photo-wrapper:hover {
             transform: scale(1.05);
             box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5);
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 51% 56%;
+            transform: scale(1.3);
+            transform-origin: 51% 56%;
         }
 
         h1 {
@@ -163,7 +180,7 @@
             margin-bottom: 0.5rem;
             line-height: 1.2;
             letter-spacing: -0.02em;
-            background: linear-gradient(135deg, var(--text) 0%, var(--highlight-bright) 100%);
+            background: linear-gradient(135deg, #e2e8f0 0%, var(--highlight) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -179,11 +196,40 @@
         .tagline {
             font-size: 1.1rem;
             max-width: 600px;
-            margin-bottom: 3rem;
+            margin-bottom: 1.25rem;
             color: var(--text-dim);
             border-left: 4px solid var(--highlight);
             padding-left: 1.5rem;
             line-height: 1.7;
+        }
+
+        .availability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            color: var(--highlight-bright);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.4rem 1rem;
+            margin-bottom: 3rem;
+            letter-spacing: 0.02em;
+        }
+
+        .availability-badge::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #4ade80;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
 
         @keyframes fadeInUp {
@@ -200,11 +246,18 @@
         /* Navigation */
         nav {
             position: fixed;
-            top: 2rem;
-            right: 2rem;
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
             display: flex;
-            gap: 1.5rem;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.85rem 2.5rem;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
             opacity: 0;
             animation: fadeIn 1s ease-out 0.5s forwards;
         }
@@ -213,25 +266,76 @@
             to { opacity: 1; }
         }
 
+        .nav-brand {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s ease;
+        }
+
+        .nav-brand:hover {
+            opacity: 0.8;
+        }
+
+        .brand-initials {
+            font-family: 'Fira Code', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            color: #3b82f6;
+            letter-spacing: 1px;
+        }
+
+        .brand-icon {
+            height: 28px;
+            width: 28px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+        }
+
         nav a {
             color: var(--text-dim);
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 0.78rem;
             font-weight: 500;
-            padding: 0.75rem 1.25rem;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.85rem;
+            transition: color 0.2s ease;
             position: relative;
         }
 
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0.85rem;
+            right: 0.85rem;
+            height: 1.5px;
+            background: var(--highlight-bright);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.2s ease;
+        }
+
         nav a:hover {
-            color: var(--text);
-            background: rgba(59, 130, 246, 0.2);
-            border-color: var(--highlight);
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), inset 0 0 15px rgba(59, 130, 246, 0.2);
-            transform: translateY(-2px);
+            color: var(--highlight-bright);
+        }
+
+        nav a:hover::after {
+            transform: scaleX(1);
+        }
+
+        nav a.active {
+            color: var(--highlight-bright);
+        }
+
+        nav a.active::after {
+            transform: scaleX(1);
         }
 
         /* Sections */
@@ -241,6 +345,11 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+        }
+
+        #activities, #contact {
+            min-height: unset;
+            justify-content: flex-start;
         }
 
         .section-title {
@@ -317,23 +426,16 @@
         }
 
         .university-logo {
-            width: 110px;
-            height: 110px;
+            width: 60px;
+            height: 60px;
             object-fit: contain;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 255, 0.1) 100%);
-            padding: 1.2rem;
-            border-radius: 16px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.2), inset 0 0 30px rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
         }
 
         .university-logo:hover {
-            border-color: rgba(255, 255, 255, 0.6);
             transform: scale(1.05);
-            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.4), inset 0 0 40px rgba(255, 255, 255, 0.25);
         }
+
 
         .company-header {
             display: flex;
@@ -343,37 +445,139 @@
         }
 
         .company-logo {
-            width: 95px;
-            height: 95px;
+            width: 55px;
+            height: 55px;
             object-fit: contain;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 255, 0.1) 100%);
-            padding: 1rem;
-            border-radius: 14px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.2), inset 0 0 30px rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
         }
 
         .company-logo:hover {
-            border-color: rgba(255, 255, 255, 0.6);
             transform: scale(1.05);
-            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.4), inset 0 0 40px rgba(255, 255, 255, 0.25);
+        }
+
+        .exp-roles-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .exp-role-box {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-left: 3px solid var(--highlight);
+            border-radius: 6px;
+            padding: 0.85rem 1rem;
+        }
+
+        .exp-role-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .exp-role-header .degree {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .exp-role-header .date {
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-size: 0.85rem;
         }
 
         /* Projects */
+        .projects-section-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--highlight);
+            margin: 0 0 1.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .projects-section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--accent);
+        }
+
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 1.75rem;
+            margin-top: 0;
+        }
+
+        .projects-sub-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin: 2.75rem 0 1.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .projects-sub-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .projects-sub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .project-card--sub {
+            background: var(--secondary);
+            padding: 1.4rem 1.6rem;
+            border: 1px solid var(--accent);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        .project-card--sub:nth-child(1) { animation-delay: 0.6s; }
+        .project-card--sub:nth-child(2) { animation-delay: 0.8s; }
+        .project-card--sub:nth-child(3) { animation-delay: 1.0s; }
+
+        .project-card--sub:hover {
+            transform: translateY(-4px);
+            border-color: var(--highlight);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card--sub h3 {
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
+            color: var(--text);
+        }
+
+        .project-card--sub p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 0.9rem;
+            line-height: 1.55;
         }
 
         .project-card {
             background: var(--secondary);
-            padding: 2rem;
-            border: 2px solid var(--accent);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 1.5rem;
+            border: 1px solid var(--accent);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             opacity: 0;
@@ -390,6 +594,10 @@
 
         .project-card:nth-child(4) {
             animation-delay: 0.6s;
+        }
+
+        .project-card:nth-child(5) {
+            animation-delay: 0.8s;
         }
 
         @keyframes fadeInScale {
@@ -432,31 +640,103 @@
             display: block;
         }
 
+        .project-image-wrapper {
+            position: relative;
+            width: calc(100% + 3rem);
+            margin: -1.5rem -1.5rem 1.25rem -1.5rem;
+            overflow: hidden;
+            display: block;
+        }
+
+        a.project-image-wrapper {
+            display: block;
+            text-decoration: none;
+            border: none;
+            outline: none;
+        }
+
+        .project-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .project-card-overlay span {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border: 1.5px solid rgba(255,255,255,0.6);
+            padding: 0.5rem 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-image-wrapper:hover .project-card-overlay {
+            opacity: 1;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            border: 1.5px solid var(--highlight);
+            color: var(--highlight-bright);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 0.5rem 1.25rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            margin-top: 1.5rem;
+        }
+
+        .download-btn:hover {
+            background: var(--highlight);
+            color: #fff;
+        }
+
+        .download-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
         .project-image {
             width: 100%;
-            height: 220px;
+            height: auto;
+            max-height: 260px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            border: 2px solid rgba(59, 130, 246, 0.3);
+            object-position: center center;
+            display: block;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
             transition: all 0.3s ease;
         }
 
-        .project-card.interactive:hover .project-image {
-            transform: scale(1.02);
-            border-color: var(--highlight);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        .project-image-wrapper:hover .project-image {
+            opacity: 0.9;
         }
 
         .project-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
+            font-size: 1.15rem;
+            margin-bottom: 0.6rem;
             position: relative;
             z-index: 1;
         }
 
         .project-card p {
             color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
             margin-bottom: 1rem;
             position: relative;
             z-index: 1;
@@ -576,48 +856,66 @@
 
         /* Skills */
         .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
             margin-top: 2rem;
+            border: 1px solid var(--accent);
         }
 
-        .skill-category {
+        .skill-row {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            border-bottom: 1px solid var(--accent);
             opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards;
+            animation: fadeIn 0.6s ease-out forwards;
         }
 
-        .skill-category:nth-child(2) {
-            animation-delay: 0.2s;
+        .skill-row:last-child { border-bottom: none; }
+        .skill-row:nth-child(2) { animation-delay: 0.08s; }
+        .skill-row:nth-child(3) { animation-delay: 0.16s; }
+        .skill-row:nth-child(4) { animation-delay: 0.24s; }
+        .skill-row:nth-child(5) { animation-delay: 0.32s; }
+        .skill-row:nth-child(6) { animation-delay: 0.40s; }
+        .skill-row:nth-child(7) { animation-delay: 0.48s; }
+        .skill-row:nth-child(8) { animation-delay: 0.56s; }
+
+        .skill-row-label {
+            padding: 1.1rem 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text);
+            font-weight: 700;
+            border-right: 1px solid var(--accent);
+            display: flex;
+            align-items: center;
+            background: rgba(59, 130, 246, 0.07);
         }
 
-        .skill-category:nth-child(3) {
-            animation-delay: 0.4s;
+        .skill-row-tags {
+            padding: 0.9rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            align-items: center;
         }
 
-        .skill-category h3 {
-            color: var(--highlight);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
+        .skill-pill {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--accent);
+            color: var(--text-dim);
+            font-size: 0.92rem;
+            padding: 0.35rem 1rem;
+            border-radius: 999px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
-        .skill-category ul {
-            list-style: none;
-        }
-
-        .skill-category li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .skill-category li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--highlight);
+        .skill-pill:hover {
+            background: rgba(59, 130, 246, 0.12);
+            border-color: var(--highlight);
+            color: var(--text);
         }
 
         /* Contact */
@@ -630,9 +928,9 @@
 
         .contact-link {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 1rem;
-            padding: 1.5rem 2rem;
+            padding: 1.5rem;
             background: var(--secondary);
             border: 2px solid var(--accent);
             text-decoration: none;
@@ -657,7 +955,11 @@
         }
 
         .contact-icon {
-            font-size: 1.5rem;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            opacity: 0.75;
+            margin-top: 2px;
         }
 
         /* Footer */
@@ -701,12 +1003,18 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="#education">Education</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#activities">Activities</a>
-        <a href="#contact">Contact</a>
+        <a href="#" class="nav-brand">
+            <span class="brand-initials">WV</span>
+            <img src="nn-logo.png" alt="Neural Network Logo" class="brand-icon">
+        </a>
+        <div class="nav-links">
+            <a href="#education">Education</a>
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#activities">Activities</a>
+            <a href="#contact">Contact</a>
+        </div>
     </nav>
 
     <div class="container">
@@ -714,14 +1022,18 @@
         <header>
             <div class="hero-content">
                 <div class="hero-name-section">
-                    <img src="profile-photo.jpg" alt="Will Vianese" class="profile-photo">
+                    <div class="profile-photo-wrapper"><img src="profile-photo.jpg" alt="Will Vianese" class="profile-photo"></div>
                     <h1>Will Vianese</h1>
                 </div>
                 <div class="subtitle">Mathematics & Computer Science • Environmental Analysis</div>
                 <p class="tagline">
-                    Data science and software engineering student building solutions through
-                    machine learning, algorithms, and systems optimization.
+                    Using data and algorithms to optimize business outcomes.
                 </p>
+                <a href="resume.pdf" download="William_Vianese_Resume.pdf" class="download-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download Resume
+                </a>
+
             </div>
             <a href="#education" class="scroll-down">
                 <span class="scroll-down-text">See My Work</span>
@@ -740,7 +1052,7 @@
                 <div class="degree">Bachelor of Arts - Double Major: Mathematics & Computer Science • Environmental Analysis</div>
                 <div class="date">Expected Graduation: May 2026 | St. Louis, MO</div>
                 <p style="margin-top: 1rem; color: var(--text-dim);">
-                    <strong>GPA: 3.82/4.00</strong> | Dean's List (Spring 2023, Fall 2023, Fall 2024)
+                    <strong>GPA: 3.82/4.00</strong> | Dean's List (Spring 2023, Fall 2023, Fall 2024, Fall 2025)
                 </p>
                 <p style="margin-top: 0.5rem; color: var(--text-dim);">
                     <strong>Relevant Coursework:</strong> Data Science, Data Mining, Artificial Intelligence,
@@ -749,38 +1061,69 @@
                     Matrix Algebra, Applied Mathematics
                 </p>
             </div>
+
+            <div class="education-item">
+                <div class="university-header">
+                    <img src="hopkins-logo.png" alt="Hopkins School Logo" class="university-logo">
+                    <h3>Hopkins School</h3>
+                </div>
+                <div class="degree">High School</div>
+                <div class="date">Graduated May 2022 | New Haven, CT</div>
+            </div>
         </section>
 
         <!-- Projects Section -->
         <section id="projects">
             <h2 class="section-title">Projects</h2>
+
+            <p class="projects-section-label">Personal Projects</p>
             <div class="projects-grid">
-                <a href="https://ferguson-map.netlify.app/" target="_blank" class="project-card interactive">
-                    <img src="map-cover.png" alt="Ferguson Vacant Housing Interactive Map" class="project-image">
-                    <h3>Interactive Ferguson Vacant Housing Map</h3>
+                <div class="project-card">
+                    <a href="https://ferguson-map.netlify.app/" target="_blank" class="project-image-wrapper">
+                        <div class="project-card-overlay"><span>Visit Site ↗</span></div>
+                        <img src="map-cover.png" alt="Ferguson Vacant Housing Interactive Map" class="project-image">
+                    </a>
+                    <h3>Ferguson Abandonment Analysis Map</h3>
                     <p>
-                        Developed an interactive geospatial visualization tool to analyze vacant housing
-                        patterns in Ferguson, MO. Built with Leaflet.js and Folium to enable dynamic
-                        layer toggling, property data exploration, and spatial analysis. Supports urban
-                        planning and policy research through accessible data visualization.
+                        Built a live geospatial decision-support platform covering 8,877 Ferguson parcels by integrating county property records, official confirmed-abandoned data, and Google Street View image analysis. Engineered end-to-end data and modeling pipelines (feature engineering, logistic regression scoring, CLIP-based AI vision classification, and blended ensemble scoring) and delivered an interactive multi-layer map with searchable addresses, model confidence breakdowns, and intervention-focused risk visualization.
                     </p>
                     <div class="tech-tags">
                         <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Folium</span>
-                        <span class="tech-tag">Leaflet.js</span>
+                        <span class="tech-tag">Logistic Regression</span>
+                        <span class="tech-tag">Computer Vision (CLIP)</span>
                         <span class="tech-tag">GIS</span>
-                        <span class="tech-tag">Data Visualization</span>
+                        <span class="tech-tag">Leaflet.js</span>
+                        <span class="tech-tag">Feature Eng.</span>
+                        <span class="tech-tag">Cross-Validation</span>
                     </div>
-                </a>
+                </div>
 
                 <div class="project-card">
-                    <h3>Dimensionality Reduction & Classification Analysis</h3>
+                    <a href="https://monopoly.up.railway.app/" target="_blank" class="project-image-wrapper">
+                        <div class="project-card-overlay"><span>Visit Site ↗</span></div>
+                        <img src="monopoly-screenshot.png" alt="Multiplayer Monopoly Game" class="project-image">
+                    </a>
+                    <h3>Multiplayer Monopoly</h3>
                     <p>
-                        Applied principal component analysis (PCA) to reduce feature dimensionality
-                        and analyze information retention. Implemented and compared multiple classification
-                        models including logistic regression, k-NN, and decision trees. Evaluated model
-                        performance using accuracy metrics and confusion matrices.
+                        Built and shipped a full stack, real time multiplayer Monopoly game with synchronized state across clients using WebSockets, event driven turn phase logic, and robust server side game rules. Developed core gameplay systems including property purchases, rent and tax handling, auctions, jail mechanics, mortgaging, house and hotel upgrades, and trading, and delivered an interactive board UI with live history feeds, ownership indicators, contextual popups, background audio controls, and continuous deployment on Railway.
                     </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">WebSockets</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Railway</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="projects-sub-label">Academic Projects</p>
+            <div class="projects-sub-grid">
+                <div class="project-card--sub">
+                    <h3>Dimensionality Reduction & Classification</h3>
+                    <p>Applied PCA to reduce feature dimensionality and compared logistic regression, k-NN, and decision tree classifiers using accuracy metrics and confusion matrices.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">Scikit-Learn</span>
@@ -789,14 +1132,9 @@
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <h3>Predictive Modeling Workflow & Model Comparison</h3>
-                    <p>
-                        Built an end-to-end predictive modeling workflow including data preprocessing,
-                        feature selection, training, and evaluation. Compared multiple predictive models
-                        to assess generalization behavior and performance using quantitative metrics.
-                        Communicated findings through structured technical reports with visualizations.
-                    </p>
+                <div class="project-card--sub">
+                    <h3>Predictive Modeling & Model Comparison</h3>
+                    <p>Built an end-to-end ML pipeline covering preprocessing, feature selection, training, and evaluation across multiple models with structured reporting and visualizations.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">Pandas</span>
@@ -805,14 +1143,9 @@
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <h3>Autonomous Agent Design Using Search & RL</h3>
-                    <p>
-                        Implemented classical search algorithms including DFS, BFS, Uniform Cost Search,
-                        and A*. Built adversarial agents using Minimax and Alpha-Beta pruning. Developed
-                        reinforcement learning agents via value iteration and Q-learning. Evaluated agent
-                        behavior across environments with varying constraints and reward structures.
-                    </p>
+                <div class="project-card--sub">
+                    <h3>Autonomous Agent Design</h3>
+                    <p>Implemented DFS, BFS, UCS, and A* search algorithms alongside Minimax, Alpha-Beta pruning, and Q-learning agents evaluated across constrained environments.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">AI</span>
@@ -918,7 +1251,7 @@
                     </li>
                     <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;">
                         <span style="position: absolute; left: 0; color: var(--highlight);">▹</span>
-                        Collaborated with the wilderness staff to create exciting team building experiences in addition to teaching fishing, rope building, survival skills, and animal/plant identification
+                        Collaborated with the wilderness staff to create exciting team building experiences in addition to teaching fishing, raft building, fire building, shelter building, survival skills, and animal/plant identification
                     </li>
                 </ul>
             </div>
@@ -928,35 +1261,81 @@
         <section id="skills">
             <h2 class="section-title">Skills</h2>
             <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Programming Languages</h3>
-                    <ul>
-                        <li>Python</li>
-                        <li>Java</li>
-                        <li>R</li>
-                    </ul>
+                <div class="skill-row">
+                    <span class="skill-row-label">Languages</span>
+                    <div class="skill-row-tags">
+                        <span class="skill-pill">HTML/CSS</span>
+                        <span class="skill-pill">Python</span>
+                        <span class="skill-pill">R</span>
+                        <span class="skill-pill">Java</span>
+                        <span class="skill-pill">TypeScript</span>
+                    </div>
                 </div>
-
-                <div class="skill-category">
-                    <h3>Libraries & Frameworks</h3>
-                    <ul>
-                        <li>Pandas</li>
-                        <li>NumPy</li>
-                        <li>Matplotlib</li>
-                        <li>Seaborn</li>
-                        <li>Scikit-Learn</li>
-                    </ul>
+                <div class="skill-row">
+                    <span class="skill-row-label">Libraries</span>
+                    <div class="skill-row-tags">
+                        <span class="skill-pill">Matplotlib</span>
+                        <span class="skill-pill">Seaborn</span>
+                        <span class="skill-pill">Pandas</span>
+                        <span class="skill-pill">NumPy</span>
+                        <span class="skill-pill">Scikit-Learn</span>
+                    </div>
                 </div>
-
-                <div class="skill-category">
-                    <h3>Tools & Technologies</h3>
-                    <ul>
-                        <li>Google Suite</li>
-                        <li>Microsoft Suite</li>
-                        <li>GitHub</li>
-                        <li>Zoom</li>
-                        <li>Slack</li>
-                    </ul>
+                <div class="skill-row">
+                    <span class="skill-row-label">Methods</span>
+                    <div class="skill-row-tags">
+                        <span class="skill-pill">Data Exploration</span>
+                        <span class="skill-pill">Feature Selection</span>
+                        <span class="skill-pill">Cross-Validation</span>
+                        <span class="skill-pill">Regression &amp; Classification</span>
+                        <span class="skill-pill">Clustering</span>
+                        <span class="skill-pill">Gradient Descent</span>
+                        <span class="skill-pill">Random Forest &amp; SVM</span>
+                        <span class="skill-pill">Neural Networks</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-row-label">Mathematics</span>
+                    <div class="skill-row-tags">
+                        <span class="skill-pill">Linear Algebra</span>
+                        <span class="skill-pill">Hypothesis Testing</span>
+                        <span class="skill-pill">Bayesian Inference</span>
+                        <span class="skill-pill">Differential Equations</span>
+                        <span class="skill-pill">Numerical Methods</span>
+                        <span class="skill-pill">Dynamical Systems</span>
+                        <span class="skill-pill">Stochastic Modeling</span>
+                        <span class="skill-pill">Partial Differential Equations</span>
+                        <span class="skill-pill">Black-Scholes</span>
+                        <span class="skill-pill">Options Pricing</span>
+                        <span class="skill-pill">Number Theory</span>
+                        <span class="skill-pill">Cryptography</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-row-label">Algorithms</span>
+                    <div class="skill-row-tags">
+                        <span class="skill-pill">Greedy Algorithms</span>
+                        <span class="skill-pill">Divide &amp; Conquer</span>
+                        <span class="skill-pill">Dynamic Programming</span>
+                        <span class="skill-pill">Graph Algorithms</span>
+                        <span class="skill-pill">Randomized Algorithms</span>
+                        <span class="skill-pill">Online &amp; Offline Algorithms</span>
+                        <span class="skill-pill">Approximation Algorithms</span>
+                        <span class="skill-pill">Nonlinear Optimization</span>
+                        <span class="skill-pill">Convex Optimization</span>
+                        <span class="skill-pill">Lagrangian Methods</span>
+                        <span class="skill-pill">Sequential Quadratic Programming</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-row-label">Tools</span>
+                    <div class="skill-row-tags">
+                        <span class="skill-pill">Google Suite</span>
+                        <span class="skill-pill">Microsoft Suite</span>
+                        <span class="skill-pill">Git &amp; GitHub</span>
+                        <span class="skill-pill">Jupyter</span>
+                        <span class="skill-pill">Qiskit</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -966,7 +1345,10 @@
             <h2 class="section-title">Activities & Awards</h2>
             <img src="rowing-action.jpg" alt="Washington University Rowing Team in Action" class="section-hero-image">
             <div class="education-item">
-                <h3>Washington University Rowing Team</h3>
+                <div class="university-header">
+                    <img src="washu-logo.png" alt="Washington University Logo" class="university-logo">
+                    <h3>Washington University Rowing Team</h3>
+                </div>
                 <div class="degree">Coach and Coxswain</div>
                 <div class="date">August 2022 – Present | St. Louis, MO</div>
                 <ul style="margin-top: 1rem; color: var(--text-dim); list-style: none; padding-left: 0;">
@@ -1004,7 +1386,7 @@
             <h2 class="section-title">Contact Information</h2>
             <div class="contact-links">
                 <a href="mailto:willv2003@icloud.com" class="contact-link">
-                    <span class="contact-icon">📧</span>
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
                     <div>
                         <div style="font-weight: 700;">Email</div>
                         <div style="font-size: 0.9rem; color: var(--text-dim);">willv2003@icloud.com</div>
@@ -1012,7 +1394,7 @@
                 </a>
 
                 <a href="tel:+12038001028" class="contact-link">
-                    <span class="contact-icon">📱</span>
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8a15.4 15.4 0 006.6 6.6l2.2-2.2a1 1 0 011-.24 11.4 11.4 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.57 3.57 1 1 0 01-.25 1.02L6.6 10.8z"/></svg>
                     <div>
                         <div style="font-weight: 700;">Phone</div>
                         <div style="font-size: 0.9rem; color: var(--text-dim);">(203) 800-1028</div>
@@ -1020,7 +1402,7 @@
                 </a>
 
                 <a href="https://linkedin.com/in/will-vianese" target="_blank" class="contact-link">
-                    <span class="contact-icon">🔗</span>
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                     <div>
                         <div style="font-weight: 700;">LinkedIn</div>
                         <div style="font-size: 0.9rem; color: var(--text-dim);">linkedin.com/in/will-vianese</div>
@@ -1031,15 +1413,41 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Will Vianese. Designed with mathematics and code.</p>
+        <p>&copy; 2026 Will Vianese</p>
     </footer>
 
     <script>
+        // Active nav link on scroll
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section');
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const id = entry.target.getAttribute('id');
+                    const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+            });
+        }, { threshold: 0.3 });
+        sections.forEach(s => sectionObserver.observe(s));
+
+        // WV brand scrolls to top
+        document.querySelector('.nav-brand').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const href = this.getAttribute('href');
+                if (href === '#') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
@@ -1148,57 +1556,49 @@
             }, 300);
         });
 
-        // Subtle grid pattern background - minimal movement
+        // Aurora streak background
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
-        let scrollY = 0;
-        const gridSize = 40;
         let time = 0;
+
+        const streaks = Array.from({ length: 6 }, (_, i) => ({
+            x: (i / 6) * 1.4 - 0.2,
+            speed: 0.00015 + i * 0.00005,
+            width: 180 + i * 60,
+            opacity: 0.04 + i * 0.012,
+            offset: i * 1.1,
+        }));
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
 
-        function drawGrid() {
+        function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            time += 1;
 
-            // Very slow time progression for minimal movement
-            time += 0.0005;
+            streaks.forEach(s => {
+                const cx = (s.x + Math.sin(time * s.speed + s.offset) * 0.18) * canvas.width;
+                const cy = canvas.height * (0.3 + Math.cos(time * s.speed * 0.7 + s.offset) * 0.3);
 
-            const scrollOffset = scrollY * 0.05;
+                const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, s.width * 3);
+                grad.addColorStop(0, `rgba(59, 130, 246, ${s.opacity})`);
+                grad.addColorStop(0.4, `rgba(99, 102, 241, ${s.opacity * 0.5})`);
+                grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
-            for (let x = 0; x < canvas.width + gridSize; x += gridSize) {
-                for (let y = 0; y < canvas.height + gridSize; y += gridSize) {
-                    const adjustedY = (y - scrollOffset) % (canvas.height + gridSize);
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.ellipse(cx, cy, s.width * 3, s.width * 1.2, Math.PI / 5, 0, Math.PI * 2);
+                ctx.fill();
+            });
 
-                    // Very subtle pulse effect
-                    const pulse = Math.sin(time + x * 0.01 + y * 0.01) * 0.02 + 0.05;
-
-                    // Draw grid lines
-                    ctx.strokeStyle = `rgba(59, 130, 246, ${pulse})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.beginPath();
-                    ctx.moveTo(x, adjustedY);
-                    ctx.lineTo(x + gridSize, adjustedY);
-                    ctx.moveTo(x, adjustedY);
-                    ctx.lineTo(x, adjustedY + gridSize);
-                    ctx.stroke();
-                }
-            }
-
-            requestAnimationFrame(drawGrid);
+            requestAnimationFrame(draw);
         }
 
-        // Update scroll position
-        window.addEventListener('scroll', () => {
-            scrollY = window.scrollY;
-        });
-
-        // Initialize
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
-        drawGrid();
+        draw();
     </script>
 </body>
 </html>
