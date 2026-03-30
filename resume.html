@@ -990,7 +990,9 @@
         @media (max-width: 768px) {
             nav {
                 padding: 0.75rem 1rem;
-                align-items: flex-start;
+                align-items: center;
+                flex-direction: column;
+                gap: 0.75rem;
             }
 
             .container {
@@ -999,22 +1001,33 @@
 
             header {
                 min-height: auto;
-                padding: 7rem 0 4rem;
+                padding: 12.5rem 0 3rem;
             }
 
             section {
                 min-height: auto;
                 padding: 3.5rem 0;
-                scroll-margin-top: 6.5rem;
+                scroll-margin-top: 10rem;
+            }
+
+            .hero-content {
+                text-align: center;
             }
 
             .hero-name-section {
                 gap: 1rem;
+                justify-content: center;
             }
 
             .profile-photo-wrapper {
                 width: 120px;
                 height: 120px;
+            }
+
+            .profile-photo {
+                object-position: 51% 42%;
+                transform: scale(1.16);
+                transform-origin: 51% 42%;
             }
 
             .subtitle {
@@ -1024,6 +1037,9 @@
             .tagline {
                 font-size: 1rem;
                 padding-left: 1rem;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: left;
             }
 
             .section-title::before {
@@ -1088,31 +1104,60 @@
                 gap: 1rem;
             }
 
+            .download-btn {
+                margin-top: 1.25rem;
+            }
+
             .scroll-down {
-                bottom: 1.5rem;
+                position: static;
+                left: auto;
+                bottom: auto;
+                transform: none;
+                margin-top: 1.75rem;
+                animation: none;
+                opacity: 1;
+            }
+
+            .scroll-down:hover {
+                transform: none;
+            }
+
+            #particle-canvas {
+                display: none;
+            }
+
+            .background-pattern {
+                display: none;
+            }
+
+            .geo-shape {
+                animation: none;
             }
         }
 
         @media (max-width: 560px) {
-            nav {
-                flex-direction: column;
-                gap: 0.75rem;
+            header {
+                padding-top: 13.5rem;
+            }
+
+            section {
+                scroll-margin-top: 11rem;
             }
 
             .nav-links {
                 width: 100%;
-                justify-content: space-between;
-                gap: 0.15rem;
+                justify-content: center;
+                gap: 0.25rem;
             }
 
             nav a {
-                font-size: 0.68rem;
-                padding: 0.3rem 0.45rem;
+                font-size: 0.66rem;
+                padding: 0.28rem 0.42rem;
             }
 
             nav a::after {
-                left: 0.45rem;
-                right: 0.45rem;
+                left: 0.42rem;
+                right: 0.42rem;
             }
 
             h1 {
@@ -1121,6 +1166,17 @@
 
             .subtitle {
                 font-size: 1.05rem;
+            }
+
+            .profile-photo-wrapper {
+                width: 108px;
+                height: 108px;
+            }
+
+            .profile-photo {
+                object-position: 51% 38%;
+                transform: scale(1.12);
+                transform-origin: 51% 38%;
             }
 
             .section-hero-image {
