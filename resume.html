@@ -184,11 +184,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            visibility: hidden;
-        }
-
-        .dud {
-            opacity: 0.72;
         }
 
         .subtitle {
@@ -1707,8 +1702,8 @@
                     const from = oldText[i] || '';
                     const to = newText[i] || '';
                     // Sequential start times with overlap - faster animation
-                    const start = i * 4;
-                    const end = start + 35;
+                    const start = i * 4;  // Each letter starts 4 frames after previous (faster)
+                    const end = start + 35; // Each letter scrambles for 35 frames (faster)
                     this.queue.push({ from, to, start, end });
                 }
 
@@ -1729,6 +1724,7 @@
                         complete++;
                         output += to;
                     } else if (this.frame >= start) {
+                        // Scramble with 20% chance to change each frame (smoother)
                         if (!char || Math.random() < 0.2) {
                             char = this.randomChar();
                             this.queue[i].char = char;
@@ -1752,30 +1748,21 @@
             randomChar() {
                 return this.chars[Math.floor(Math.random() * this.chars.length)];
             }
-
-            randomText(length) {
-                let output = '';
-                for (let i = 0; i < length; i++) output += this.randomChar();
-                return output;
-            }
         }
 
         // Trigger scramble animation on page load
         window.addEventListener('DOMContentLoaded', () => {
             const nameElement = document.querySelector('h1');
-            if (!nameElement || nameElement.dataset.scrambleReady === 'true') return;
-            nameElement.dataset.scrambleReady = 'true';
             const fx = new TextScramble(nameElement);
 
             // Start with scrambled text
-            nameElement.textContent = fx.randomText('Will Vianese'.length);
-            nameElement.style.visibility = 'visible';
+            nameElement.innerText = '############';
 
             // Animate to real name after a short delay
             setTimeout(() => {
                 fx.setText('Will Vianese');
             }, 300);
-        }, { once: true });
+        });
 
         // Aurora streak background
         const canvas = document.getElementById('particle-canvas');
