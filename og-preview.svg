@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Will Vianese portfolio preview">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect x="120" y="150" width="10" height="330" rx="5" fill="#60a5fa" />
+  <text x="170" y="260" fill="#f1f5f9" font-family="Inter, Arial, sans-serif" font-size="82" font-weight="800">
+    Will Vianese
+  </text>
+  <text x="170" y="340" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="500">
+    Math &amp; CS Portfolio
+  </text>
+  <text x="170" y="418" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="28">
+    Projects, experience, skills, and contact information
+  </text>
+</svg>
