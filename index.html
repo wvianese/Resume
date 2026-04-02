@@ -334,12 +334,14 @@
             transition: transform 0.2s ease;
         }
 
-        nav a:hover {
-            color: var(--highlight-bright);
-        }
+        @media (hover: hover) {
+            nav a:hover {
+                color: var(--highlight-bright);
+            }
 
-        nav a:hover::after {
-            transform: scaleX(1);
+            nav a:hover::after {
+                transform: scaleX(1);
+            }
         }
 
         nav a.active {
@@ -1654,13 +1656,18 @@
             const nav = document.querySelector('nav');
             const navOffset = (nav ? nav.offsetHeight : 0) + 24;
             let activeSection = sections[0];
+            const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
 
-            sections.forEach(section => {
-                const top = section.offsetTop - navOffset;
-                if (window.scrollY >= top) {
-                    activeSection = section;
-                }
-            });
+            if (nearBottom) {
+                activeSection = sections[sections.length - 1];
+            } else {
+                sections.forEach(section => {
+                    const top = section.offsetTop - navOffset;
+                    if (window.scrollY >= top) {
+                        activeSection = section;
+                    }
+                });
+            }
 
             navLinks.forEach(link => link.classList.remove('active'));
             const id = activeSection.getAttribute('id');
@@ -1689,9 +1696,12 @@
                 }
                 const target = document.querySelector(href);
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const nav = document.querySelector('nav');
+                    const navOffset = (nav ? nav.offsetHeight : 0) + 24;
+                    const targetTop = target.getBoundingClientRect().top + window.scrollY - navOffset;
+                    window.scrollTo({
+                        top: targetTop,
+                        behavior: 'smooth'
                     });
                 }
             });
