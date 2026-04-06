@@ -1650,7 +1650,6 @@
         // Active nav link on scroll
         const navLinks = document.querySelectorAll('.nav-links a');
         const sections = document.querySelectorAll('section');
-        let activeNavRaf = null;
 
         function setActiveNavById(id) {
             navLinks.forEach(link => {
@@ -1663,6 +1662,7 @@
             const navOffset = (nav ? nav.offsetHeight : 0) + 24;
             const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
             let activeSection = sections[0];
+            let bestDistance = Infinity;
 
             if (nearBottom) {
                 activeSection = sections[sections.length - 1];
@@ -1672,27 +1672,18 @@
                     const targetLine = navOffset + Math.min(window.innerHeight * 0.22, 160);
                     const distance = Math.abs(rect.top - targetLine);
 
-                    if (!activeSection || distance < activeSection.distance) {
-                        activeSection = { section, distance };
+                    if (distance < bestDistance) {
+                        bestDistance = distance;
+                        activeSection = section;
                     }
                 });
-
-                activeSection = activeSection.section;
             }
 
             setActiveNavById(activeSection.getAttribute('id'));
         }
 
-        function queueActiveNavUpdate() {
-            if (activeNavRaf !== null) return;
-            activeNavRaf = requestAnimationFrame(() => {
-                activeNavRaf = null;
-                updateActiveNav();
-            });
-        }
-
-        window.addEventListener('scroll', queueActiveNavUpdate, { passive: true });
-        window.addEventListener('resize', queueActiveNavUpdate);
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+        window.addEventListener('resize', updateActiveNav);
         updateActiveNav();
 
         // WV brand scrolls to top
@@ -1721,9 +1712,9 @@
                         top: Math.min(targetTop, maxScroll),
                         behavior: 'smooth'
                     });
-                    setTimeout(queueActiveNavUpdate, 50);
-                    setTimeout(queueActiveNavUpdate, 250);
-                    setTimeout(queueActiveNavUpdate, 500);
+                    setTimeout(updateActiveNav, 50);
+                    setTimeout(updateActiveNav, 250);
+                    setTimeout(updateActiveNav, 500);
                 }
             });
         });
