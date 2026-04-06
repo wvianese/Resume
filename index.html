@@ -1650,32 +1650,49 @@
         // Active nav link on scroll
         const navLinks = document.querySelectorAll('.nav-links a');
         const sections = document.querySelectorAll('section');
+        let activeNavRaf = null;
+
+        function setActiveNavById(id) {
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+            });
+        }
 
         function updateActiveNav() {
             const nav = document.querySelector('nav');
             const navOffset = (nav ? nav.offsetHeight : 0) + 24;
-            let activeSection = sections[0];
             const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+            let activeSection = sections[0];
 
             if (nearBottom) {
                 activeSection = sections[sections.length - 1];
             } else {
                 sections.forEach(section => {
-                    const top = section.offsetTop - navOffset;
-                    if (window.scrollY >= top) {
-                        activeSection = section;
+                    const rect = section.getBoundingClientRect();
+                    const targetLine = navOffset + Math.min(window.innerHeight * 0.22, 160);
+                    const distance = Math.abs(rect.top - targetLine);
+
+                    if (!activeSection || distance < activeSection.distance) {
+                        activeSection = { section, distance };
                     }
                 });
+
+                activeSection = activeSection.section;
             }
 
-            navLinks.forEach(link => link.classList.remove('active'));
-            const id = activeSection.getAttribute('id');
-            const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
-            if (activeLink) activeLink.classList.add('active');
+            setActiveNavById(activeSection.getAttribute('id'));
         }
 
-        window.addEventListener('scroll', updateActiveNav, { passive: true });
-        window.addEventListener('resize', updateActiveNav);
+        function queueActiveNavUpdate() {
+            if (activeNavRaf !== null) return;
+            activeNavRaf = requestAnimationFrame(() => {
+                activeNavRaf = null;
+                updateActiveNav();
+            });
+        }
+
+        window.addEventListener('scroll', queueActiveNavUpdate, { passive: true });
+        window.addEventListener('resize', queueActiveNavUpdate);
         updateActiveNav();
 
         // WV brand scrolls to top
@@ -1695,6 +1712,7 @@
                 }
                 const target = document.querySelector(href);
                 if (target) {
+                    setActiveNavById(target.getAttribute('id'));
                     const nav = document.querySelector('nav');
                     const navOffset = (nav ? nav.offsetHeight : 0) + 24;
                     const targetTop = target.getBoundingClientRect().top + window.scrollY - navOffset;
@@ -1703,6 +1721,9 @@
                         top: Math.min(targetTop, maxScroll),
                         behavior: 'smooth'
                     });
+                    setTimeout(queueActiveNavUpdate, 50);
+                    setTimeout(queueActiveNavUpdate, 250);
+                    setTimeout(queueActiveNavUpdate, 500);
                 }
             });
         });
