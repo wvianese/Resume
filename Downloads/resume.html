@@ -1690,8 +1690,9 @@
                     const nav = document.querySelector('nav');
                     const navOffset = (nav ? nav.offsetHeight : 0) + 24;
                     const targetTop = target.getBoundingClientRect().top + window.scrollY - navOffset;
+                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
                     window.scrollTo({
-                        top: targetTop,
+                        top: Math.min(targetTop, maxScroll),
                         behavior: 'smooth'
                     });
                 }
