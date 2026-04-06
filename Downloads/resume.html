@@ -1650,6 +1650,7 @@
         // Active nav link on scroll
         const navLinks = document.querySelectorAll('.nav-links a');
         const sections = document.querySelectorAll('section');
+        const sectionTitles = document.querySelectorAll('section .section-title');
 
         function setActiveNavById(id) {
             navLinks.forEach(link => {
@@ -1662,18 +1663,14 @@
             const navOffset = (nav ? nav.offsetHeight : 0) + 24;
             const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
             let activeSection = sections[0];
-            let bestDistance = Infinity;
 
             if (nearBottom) {
                 activeSection = sections[sections.length - 1];
             } else {
-                sections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    const targetLine = navOffset + Math.min(window.innerHeight * 0.22, 160);
-                    const distance = Math.abs(rect.top - targetLine);
-
-                    if (distance < bestDistance) {
-                        bestDistance = distance;
+                sectionTitles.forEach(title => {
+                    const section = title.closest('section');
+                    const rect = title.getBoundingClientRect();
+                    if (rect.top - navOffset <= 0) {
                         activeSection = section;
                     }
                 });
