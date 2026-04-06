@@ -1677,7 +1677,8 @@
                 sectionTitles.forEach(title => {
                     const section = title.closest('section');
                     const rect = title.getBoundingClientRect();
-                    if (rect.top - navOffset <= 0) {
+                    const triggerLine = window.innerHeight * 0.5;
+                    if (rect.top <= triggerLine) {
                         activeSection = section;
                     }
                 });
