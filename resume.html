@@ -1651,6 +1651,8 @@
         const navLinks = document.querySelectorAll('.nav-links a');
         const sections = document.querySelectorAll('section');
         const sectionTitles = document.querySelectorAll('section .section-title');
+        let navLockId = null;
+        let navLockTimeout = null;
 
         function setActiveNavById(id) {
             navLinks.forEach(link => {
@@ -1659,6 +1661,11 @@
         }
 
         function updateActiveNav() {
+            if (navLockId) {
+                setActiveNavById(navLockId);
+                return;
+            }
+
             const nav = document.querySelector('nav');
             const navOffset = (nav ? nav.offsetHeight : 0) + 24;
             const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
@@ -1700,7 +1707,9 @@
                 }
                 const target = document.querySelector(href);
                 if (target) {
-                    setActiveNavById(target.getAttribute('id'));
+                    navLockId = target.getAttribute('id');
+                    setActiveNavById(navLockId);
+                    if (navLockTimeout) clearTimeout(navLockTimeout);
                     const nav = document.querySelector('nav');
                     const navOffset = (nav ? nav.offsetHeight : 0) + 24;
                     const targetTop = target.getBoundingClientRect().top + window.scrollY - navOffset;
@@ -1709,9 +1718,10 @@
                         top: Math.min(targetTop, maxScroll),
                         behavior: 'smooth'
                     });
-                    setTimeout(updateActiveNav, 50);
-                    setTimeout(updateActiveNav, 250);
-                    setTimeout(updateActiveNav, 500);
+                    navLockTimeout = setTimeout(() => {
+                        navLockId = null;
+                        updateActiveNav();
+                    }, 700);
                 }
             });
         });
