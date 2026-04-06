@@ -1654,6 +1654,14 @@
         let navLockId = null;
         let navLockTimeout = null;
 
+        function releaseNavLockSoon() {
+            if (navLockTimeout) clearTimeout(navLockTimeout);
+            navLockTimeout = setTimeout(() => {
+                navLockId = null;
+                updateActiveNav();
+            }, 180);
+        }
+
         function setActiveNavById(id) {
             navLinks.forEach(link => {
                 link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
@@ -1687,7 +1695,13 @@
             setActiveNavById(activeSection.getAttribute('id'));
         }
 
-        window.addEventListener('scroll', updateActiveNav, { passive: true });
+        window.addEventListener('scroll', () => {
+            if (navLockId) {
+                releaseNavLockSoon();
+                return;
+            }
+            updateActiveNav();
+        }, { passive: true });
         window.addEventListener('resize', updateActiveNav);
         updateActiveNav();
 
@@ -1719,10 +1733,7 @@
                         top: Math.min(targetTop, maxScroll),
                         behavior: 'smooth'
                     });
-                    navLockTimeout = setTimeout(() => {
-                        navLockId = null;
-                        updateActiveNav();
-                    }, 700);
+                    releaseNavLockSoon();
                 }
             });
         });
