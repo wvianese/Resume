@@ -201,7 +201,7 @@
         .subtitle {
             font-size: clamp(1.2rem, 3vw, 2rem);
             color: var(--text-dim);
-            margin-bottom: 2rem;
+            margin-bottom: 0.75rem;
             font-weight: 400;
         }
 
@@ -219,26 +219,32 @@
         .hero-note {
             display: inline-flex;
             align-items: center;
-            gap: 0.55rem;
-            margin-top: 1rem;
-            padding: 0.75rem 1rem;
-            border: 1px solid rgba(59, 130, 246, 0.45);
-            border-radius: 999px;
-            background: rgba(59, 130, 246, 0.08);
-            color: #dbeafe;
-            font-size: 0.92rem;
-            font-weight: 600;
-            line-height: 1.4;
-            width: fit-content;
-            max-width: 100%;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .hero-note::before {
+            content: '';
+            width: 36px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.95), rgba(59, 130, 246, 0.2));
         }
 
         .hero-note-label {
-            color: var(--highlight);
+            color: var(--highlight-bright);
             font-weight: 700;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.04em;
             text-transform: uppercase;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
+        }
+
+        .hero-note-text {
+            color: var(--text-dim);
         }
 
         .availability-badge {
@@ -1077,7 +1083,7 @@
             }
 
             .subtitle {
-                margin-bottom: 1.5rem;
+                margin-bottom: 0.65rem;
                 text-align: center;
             }
 
@@ -1101,11 +1107,14 @@
                 align-items: center;
                 justify-content: center;
                 text-align: center;
+                gap: 0.3rem;
                 max-width: 22rem;
-                margin: 1rem auto 0;
-                padding: 0.85rem 1rem;
-                border-radius: 1rem;
-                font-size: 0.88rem;
+                margin: 0 auto 1.15rem;
+                font-size: 0.86rem;
+            }
+
+            .hero-note::before {
+                width: 30px;
             }
 
             .section-title::before {
@@ -1295,6 +1304,7 @@
                     <h1 data-final-name="Will Vianese">############</h1>
                 </div>
                 <div class="subtitle">Mathematics & Computer Science • Environmental Analysis</div>
+                <div class="hero-note"><span class="hero-note-label">UK Work Authorization</span><span class="hero-note-text">High Potential Individual (HPI) Visa • No sponsorship required</span></div>
                 <p class="tagline">
                     Using data and algorithms to optimize business outcomes.
                 </p>
@@ -1302,7 +1312,6 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     Download Resume
                 </a>
-                <div class="hero-note"><span class="hero-note-label">UK Work Authorization</span><span>High Potential Individual (HPI) Visa • No sponsorship required</span></div>
 
             </div>
             <a href="#education" class="scroll-down">
