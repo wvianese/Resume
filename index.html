@@ -215,6 +215,32 @@
             line-height: 1.7;
         }
 
+
+        .hero-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(59, 130, 246, 0.45);
+            border-radius: 999px;
+            background: rgba(59, 130, 246, 0.08);
+            color: #dbeafe;
+            font-size: 0.92rem;
+            font-weight: 600;
+            line-height: 1.4;
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .hero-note-label {
+            color: var(--highlight);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+        }
+
         .availability-badge {
             display: inline-flex;
             align-items: center;
@@ -1069,6 +1095,19 @@
                 text-align: center;
             }
 
+            .hero-note {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                max-width: 22rem;
+                margin: 1rem auto 0;
+                padding: 0.85rem 1rem;
+                border-radius: 1rem;
+                font-size: 0.88rem;
+            }
+
             .section-title::before {
                 display: none;
             }
@@ -1259,11 +1298,11 @@
                 <p class="tagline">
                     Using data and algorithms to optimize business outcomes.
                 </p>
-                <p class="hero-note">UK Work Authorization: High Potential Individual (HPI) Visa • No sponsorship required</p>
                 <a href="resume.pdf" download="William_Vianese_Resume.pdf" class="download-btn">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     Download Resume
                 </a>
+                <div class="hero-note"><span class="hero-note-label">UK Work Authorization</span><span>High Potential Individual (HPI) Visa • No sponsorship required</span></div>
 
             </div>
             <a href="#education" class="scroll-down">
